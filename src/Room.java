@@ -8,21 +8,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Room 
 {
 	private int id;
-	private int y;
-	private int x;
-	private int z;
 	private String name ="room";
 	private String description = "description";
 	private String startNarration = "";
 	private ArrayList<EventGen> events;
 	private ArrayList<ItemGen> items;
 	private DirectionConstraints dirConstraints;
+	private Location location;
 	public Room()
 	{
 		id = -1;
-		setY(-1);
-		setX(-1);
-		setZ(-1);
+		location = new Location();
 		name = "RoomName";
 		description = "description";
 		startNarration = "startNarration";
@@ -93,26 +89,13 @@ public class Room
 		this.dirConstraints = dirConstraints;
 	}
 	
-	public int getX() {
-		return x;
+	
+	public Location getLocation() {
+		return location;
 	}
-	@XmlAttribute
-	public void setX(int x) {
-		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	@XmlAttribute
-	public void setY(int y) {
-		this.y = y;
-	}
-	public int getZ() {
-		return z;
-	}
-	@XmlAttribute
-	public void setZ(int z) {
-		this.z = z;
+	@XmlElement
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	
