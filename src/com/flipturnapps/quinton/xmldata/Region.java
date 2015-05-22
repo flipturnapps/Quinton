@@ -11,6 +11,10 @@ public class Region
 	{
 		setName("regionName");
 	}
+	public Region(String name)
+	{
+		setName(name);
+	}
 	public String getName() {
 		return name;
 	}

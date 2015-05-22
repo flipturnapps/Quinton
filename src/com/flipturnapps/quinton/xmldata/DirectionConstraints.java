@@ -12,6 +12,25 @@ public class DirectionConstraints
 	private boolean east;
 	private boolean west;
 	
+	public DirectionConstraints()
+	{
+		north = true;
+		south = true;
+		east = true;
+		west = true;
+		up = false;
+		down = false;
+	}
+	
+	public DirectionConstraints(boolean n, boolean s, boolean e, boolean w, boolean u, boolean d){
+		north = n;
+		south = s;
+		east = e;
+		west = w;
+		up = u;
+		down = d;
+	}
+	
 	public boolean canUp() {
 		return up;
 	}
