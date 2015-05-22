@@ -16,7 +16,7 @@ public class Player
 		this.healthPercentage = healthPercentage;
 	}
 	
-	//xmlStuff
+	//xml annotation isnt nessesary for this method only "setter" methods one you read this delete the comment
 	public void addHealth(double healAmount){
 		this.healthPercentage += healAmount;
 	}

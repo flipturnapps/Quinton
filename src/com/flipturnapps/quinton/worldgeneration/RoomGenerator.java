@@ -20,12 +20,8 @@ public class RoomGenerator
 		startRoom.setId(0);
 		startRoom.setDirConstraints(new DirectionConstraints());
 		startRoom.setRegion(new Region("forest"));
-		ItemGen axe = new ItemGen();
-		//axe won't be in start room in final game
-		//more info
-		startRoom.addItem(axe);
+		//put item in room
 		return startRoom;
-		startRoom.
 		
 	}
 }
