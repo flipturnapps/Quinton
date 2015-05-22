@@ -23,7 +23,6 @@ public class WorldGenerator
 			JAXBContext jaxbContext = JAXBContext.newInstance(World.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-			// output pretty printed
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(world, file);
