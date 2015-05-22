@@ -11,45 +11,44 @@ public class DirectionConstraints
 	private boolean south;
 	private boolean east;
 	private boolean west;
-	public boolean isUp() {
+	
+	public boolean canUp() {
 		return up;
 	}
-	@XmlAttribute
+	@XmlElement
 	public void setUp(boolean up) {
 		this.up = up;
 	}
-	public boolean isDown() {
+	public boolean canDown() {
 		return down;
 	}
-	@XmlAttribute
+	@XmlElement
 	public void setDown(boolean down) {
 		this.down = down;
 	}
-	public boolean isNorth() {
-		return north;
-	}
-	@XmlAttribute
+	
+	@XmlElement
 	public void setNorth(boolean north) {
 		this.north = north;
 	}
-	public boolean isEast() {
+	public boolean canEast() {
 		return east;
 	}
-	@XmlAttribute
+	@XmlElement
 	public void setEast(boolean east) {
 		this.east = east;
 	}
-	public boolean isSouth() {
+	public boolean canSouth() {
 		return south;
 	}
-	@XmlAttribute
+	@XmlElement
 	public void setSouth(boolean south) {
 		this.south = south;
 	}
-	public boolean isWest() {
+	public boolean canWest() {
 		return west;
 	}
-	@XmlAttribute
+	@XmlElement
 	public void setWest(boolean west) {
 		this.west = west;
 	}
