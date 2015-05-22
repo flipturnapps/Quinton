@@ -15,9 +15,11 @@ public class Room
 	private ArrayList<EventGen> events;
 	private ArrayList<ItemGen> items;
 	private DirectionConstraints dirConstraints;
+	private Region region;
 	private Location location;
 	public Room()
 	{
+		region = new Region();
 		id = -1;
 		location = new Location();
 		name = "RoomName";
@@ -97,6 +99,13 @@ public class Room
 	@XmlElement
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	public Region getRegion() {
+		return region;
+	}
+	@XmlElement
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 	
 	
