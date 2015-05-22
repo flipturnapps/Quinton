@@ -31,7 +31,7 @@ public class World
 	{
 		for(int i = 0; i < rooms.length; i++)
 		{
-			rooms[i].inflate();
+			rooms[i].inflate(this);
 		}
 	}
 	public void deflate()
