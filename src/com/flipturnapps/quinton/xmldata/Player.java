@@ -15,6 +15,11 @@ public class Player
 	public void setHealthPercentage(double healthPercentage) {
 		this.healthPercentage = healthPercentage;
 	}
+	
+	//xmlStuff
+	public void addHealth(double healAmount){
+		this.healthPercentage += healAmount;
+	}
 
 	public Location getLocation() {
 		return location;

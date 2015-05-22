@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Region 
 {
 	private String name;
+	
 	public Region()
 	{
 		setName("regionName");
