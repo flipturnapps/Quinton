@@ -23,6 +23,10 @@ public class World
 	public void setRoom(Room[] rooms) {
 		this.rooms = rooms;
 	}
+	public void outputLine(String string) 
+	{
+		System.out.println(string);
+	}
 	
 	
 	
