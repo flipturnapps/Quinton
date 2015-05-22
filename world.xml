@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<world colCount="1" rowCount="1">
-    <room col="0" id="0" row="0">
-        <description>You are surrounded by darkness.</description>
-        <directioUpAllowed>true</directioUpAllowed>
-        <directionDownAllowed>true</directionDownAllowed>
-        <directionEastAllowed>true</directionEastAllowed>
-        <directionNorthAllowed>true</directionNorthAllowed>
-        <directionSouthAllowed>true</directionSouthAllowed>
-        <directionWestAllowed>true</directionWestAllowed>
-        <event eventType="itemuse">
-            <eventAttributes>itemid:0</eventAttributes>
-            <functions functionType="itemadd">
-                <functionAttribute>item:1,Wooden Door,visible:true,pocketable:false,interactable:true,useSynonyms:open,nameSynonyms:door</functionAttribute>
-            </functions>
-        </event>
-        <item id="0" itemType="key" name="Flashlight"/>
-        <name>Dark Room</name>
-        <startNarration>You find yourself in a dark room.</startNarration>
+<world>
+    <room id="0">
+        <description>The deep darkness of the forest surrounds you.</description>
+        <dirConstraints>
+            <down>false</down>
+            <east>true</east>
+            <north>true</north>
+            <south>true</south>
+            <up>false</up>
+            <west>true</west>
+        </dirConstraints>
+        <inflatedItems>
+            <id>0</id>
+            <name>Pamphlet</name>
+        </inflatedItems>
+        <location x="0" y="0" z="0"/>
+        <name>A Dark Forest</name>
+        <region name="forest"/>
+        <startNarration>You stand alone in a forest</startNarration>
     </room>
 </world>

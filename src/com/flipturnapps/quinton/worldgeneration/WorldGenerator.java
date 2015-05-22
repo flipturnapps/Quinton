@@ -4,6 +4,7 @@ import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import com.flipturnapps.quinton.xmldata.Room;
 import com.flipturnapps.quinton.xmldata.World;
 
 
@@ -15,7 +16,7 @@ public class WorldGenerator
 	}
 
 	private void go() {
-		World world = generateQWorld();
+		World world = this.generateQWorld();
 		try
 		{
 			File file = new File("world.xml");
@@ -37,7 +38,13 @@ public class WorldGenerator
 
 	private World generateQWorld()
 	{
-		return null;
+		RoomGenerator gen = new RoomGenerator();
+		World world = new World();
+		Room startRoom = gen.generateStartRoom(world);
+		Room[] rooms = new Room[1];
+		rooms[0] = startRoom;
+		world.setRoom(rooms);
+		return world;
 	}
 
 }

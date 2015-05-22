@@ -31,40 +31,44 @@ public class DirectionConstraints
 		down = d;
 	}
 	
-	public boolean canUp() {
+	public boolean getUp() {
 		return up;
 	}
 	@XmlElement
 	public void setUp(boolean up) {
 		this.up = up;
 	}
-	public boolean canDown() {
+	public boolean getDown() {
 		return down;
 	}
 	@XmlElement
 	public void setDown(boolean down) {
 		this.down = down;
 	}
+	public boolean getNorth()
+	{
+		return north;
+	}
 	
 	@XmlElement
 	public void setNorth(boolean north) {
 		this.north = north;
 	}
-	public boolean canEast() {
+	public boolean getEast() {
 		return east;
 	}
 	@XmlElement
 	public void setEast(boolean east) {
 		this.east = east;
 	}
-	public boolean canSouth() {
+	public boolean getSouth() {
 		return south;
 	}
 	@XmlElement
 	public void setSouth(boolean south) {
 		this.south = south;
 	}
-	public boolean canWest() {
+	public boolean getWest() {
 		return west;
 	}
 	@XmlElement

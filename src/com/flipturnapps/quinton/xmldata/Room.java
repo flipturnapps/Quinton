@@ -126,6 +126,7 @@ public class Room
 			Item item = this.getInflatedItems().get(i);
 			this.getItem().add(item.deflate());
 		}
+		this.getInflatedItems().clear();
 		//need more for events and functions
 	}
 	public void inflate(World world)
