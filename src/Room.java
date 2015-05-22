@@ -8,8 +8,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Room 
 {
 	private int id;
-	private int col;
-	private int row;
+	private int y;
+	private int x;
+	private int z;
 	private String name ="room";
 	private String description = "description";
 	private String startNarration = "";
@@ -24,8 +25,9 @@ public class Room
 	public Room()
 	{
 		id = -1;
-		col = -1;
-		row = -1;
+		setY(-1);
+		setX(-1);
+		setZ(-1);
 		name = "RoomName";
 		description = "description";
 		startNarration = "startNarration";
@@ -39,20 +41,7 @@ public class Room
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCol() {
-		return col;
-	}
-	@XmlAttribute
-	public void setCol(int col) {
-		this.col = col;
-	}
-	public int getRow() {
-		return row;
-	}
-	@XmlAttribute
-	public void setRow(int row) {
-		this.row = row;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -141,6 +130,28 @@ public class Room
 	@XmlElement
 	public void setDirectionDownAllowed(boolean directionDownAllowed) {
 		this.directionDownAllowed = directionDownAllowed;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	@XmlAttribute
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	@XmlAttribute
+	public void setY(int y) {
+		this.y = y;
+	}
+	public int getZ() {
+		return z;
+	}
+	@XmlAttribute
+	public void setZ(int z) {
+		this.z = z;
 	}
 	
 	
