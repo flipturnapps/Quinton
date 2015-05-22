@@ -15,6 +15,12 @@ public class Room
 	private String startNarration = "";
 	private ArrayList<EventGen> events;
 	private ArrayList<ItemGen> items;
+	private boolean directionNorthAllowed = true;
+	private boolean directionSouthAllowed = true;
+	private boolean directionEastAllowed = true;
+	private boolean directionWestAllowed = true;
+	private boolean directioUpAllowed = true;
+	private boolean directionDownAllowed = true;
 	public Room()
 	{
 		id = -1;
@@ -50,7 +56,7 @@ public class Room
 	public String getName() {
 		return name;
 	}
-	@XmlAttribute
+	@XmlElement
 	public void setName(String name) {
 		this.name = name;
 	}	
@@ -93,6 +99,48 @@ public class Room
 	public void addItem(ItemGen g)
 	{
 		items.add(g);
+	}
+	public boolean isDirectionNorthAllowed() {
+		return directionNorthAllowed;
+	}
+	@XmlElement
+	public void setDirectionNorthAllowed(boolean directionNorthAllowed) {
+		this.directionNorthAllowed = directionNorthAllowed;
+	}
+	public boolean isDirectionSouthAllowed() {
+		return directionSouthAllowed;
+	}
+	@XmlElement
+	public void setDirectionSouthAllowed(boolean directionSouthAllowed) {
+		this.directionSouthAllowed = directionSouthAllowed;
+	}
+	public boolean isDirectionEastAllowed() {
+		return directionEastAllowed;
+	}
+	@XmlElement
+	public void setDirectionEastAllowed(boolean directionEastAllowed) {
+		this.directionEastAllowed = directionEastAllowed;
+	}
+	public boolean isDirectionWestAllowed() {
+		return directionWestAllowed;
+	}
+	@XmlElement
+	public void setDirectionWestAllowed(boolean directionWestAllowed) {
+		this.directionWestAllowed = directionWestAllowed;
+	}
+	public boolean isDirectioUpAllowed() {
+		return directioUpAllowed;
+	}
+	@XmlElement
+	public void setDirectioUpAllowed(boolean directioUpAllowed) {
+		this.directioUpAllowed = directioUpAllowed;
+	}
+	public boolean isDirectionDownAllowed() {
+		return directionDownAllowed;
+	}
+	@XmlElement
+	public void setDirectionDownAllowed(boolean directionDownAllowed) {
+		this.directionDownAllowed = directionDownAllowed;
 	}
 	
 	

@@ -16,7 +16,7 @@ public class WorldGenerator
 		World world = generateWorld();
 		try
 		{
-			File file = new File("C:/Users/Kevin/Google Drive/Eclipse/workspace/JAXB/world.xml");
+			File file = new File("world.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(World.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
