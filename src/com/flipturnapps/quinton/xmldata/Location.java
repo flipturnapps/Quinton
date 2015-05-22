@@ -10,9 +10,9 @@ public class Location
 	private int z;
 	public Location()
 	{
-		x = -1;
-		y = -1;
-		z = -1;
+		x = 0;
+		y = 0;
+		z = 0;
 	}
 	
 	public Location(int x1, int y1, int z1){
@@ -41,6 +41,28 @@ public class Location
 	@XmlAttribute
 	public void setZ(int z) {
 		this.z = z;
+	}
+	public void changeX(int c)
+	{
+		this.setX(this.getX() + c);
+	}
+	public void changeY(int c)
+	{
+		this.setY(this.getY() + c);
+	}
+	public void changeZ(int c)
+	{
+		this.setZ(this.getZ() + c);
+	}
+	public boolean equals(Location l)
+	{
+		if(this.getX() != l.getX())
+			return false;
+		if(this.getY() != l.getY())
+			return false;
+		if(this.getZ() != l.getZ())
+			return false;
+		return true;
 	}
 
 }

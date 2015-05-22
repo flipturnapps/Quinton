@@ -8,6 +8,7 @@ public class World
 {
 	private Room[] rooms;
 	private String name;
+	private Player player;
 	
 	public String getName() {
 		return name;
@@ -41,7 +42,24 @@ public class World
 			rooms[i].deflate();
 		}
 	}
-	
+	public Room getPlayersRoom() 
+	{
+		for(int i = 0; i < this.getRoom().length; i++)
+		{
+			if(this.getRoom()[i].getLocation().equals(this.getPlayer().getLocation()))
+				return this.getRoom()[i];
+		}
+		return null;
+	}
+	@XmlElement
+	public void setPlayer(Player p)
+	{
+		this.player = p;
+	}
+	public Player getPlayer()
+	{
+		return this.player;
+	}
 	
 	
 	
