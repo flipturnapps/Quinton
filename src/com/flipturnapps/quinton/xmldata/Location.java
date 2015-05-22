@@ -14,6 +14,13 @@ public class Location
 		y = -1;
 		z = -1;
 	}
+	
+	public Location(int x1, int y1, int z1){
+		x = x1;
+		y = y1;
+		z = z1;
+	}
+	
 	public int getX() {
 		return x;
 	}
