@@ -1,3 +1,4 @@
+package com.flipturnapps.quinton.xmldata;
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlAttribute;

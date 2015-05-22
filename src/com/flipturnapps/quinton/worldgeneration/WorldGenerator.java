@@ -1,8 +1,10 @@
+package com.flipturnapps.quinton.worldgeneration;
 import java.io.File;
-import java.util.function.Function;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+
+import com.flipturnapps.quinton.xmldata.World;
 
 
 public class WorldGenerator 
