@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.flipturnapps.quinton.item.Item;
+
 @XmlRootElement
 public class Room 
 {
@@ -14,6 +16,7 @@ public class Room
 	private String startNarration = "";
 	private ArrayList<EventGen> events;
 	private ArrayList<ItemGen> items;
+	private ArrayList<Item> inflatedItems;
 	private DirectionConstraints dirConstraints;
 	private Region region;
 	private Location location;
@@ -27,6 +30,7 @@ public class Room
 		startNarration = "startNarration";
 		events = new ArrayList<EventGen>();
 		items = new ArrayList<ItemGen>();
+		inflatedItems = new ArrayList<Item>();
 	}
 	public int getId() {
 		return id;
@@ -68,10 +72,7 @@ public class Room
 	{
 		this.events.add(event);
 	}
-	public void inflate()
-	{
-		
-	}
+	
 	public ArrayList<ItemGen> getItem() {
 		return items;
 	}
@@ -79,7 +80,7 @@ public class Room
 	public void setItem(ArrayList<ItemGen> items) {
 		this.items = items;
 	}
-	public void addItem(ItemGen g)
+	public void addItemGen(ItemGen g)
 	{
 		items.add(g);
 	}
@@ -106,6 +107,36 @@ public class Room
 	@XmlElement
 	public void setRegion(Region region) {
 		this.region = region;
+	}
+	public ArrayList<Item> getInflatedItems() {
+		return inflatedItems;
+	}
+	public void setInflatedItems(ArrayList<Item> inflatedItems) {
+		this.inflatedItems = inflatedItems;
+	}
+	public void addInflatedItem(Item item)
+	{
+		this.getInflatedItems().add(item);
+	}
+	public void deflate() 
+	{
+		this.getItem().clear();
+		for(int i = 0; i < this.getInflatedItems().size(); i++)
+		{
+			Item item = this.getInflatedItems().get(i);
+			this.getItem().add(item.deflate());
+		}
+		//need more for events and functions
+	}
+	public void inflate(World world)
+	{
+		this.getInflatedItems().clear();
+		for(int i = 0; i < this.getItem().size(); i++)
+		{
+			ItemGen itemgen = this.getItem().get(i);
+			Item.inflateAndAddItem(world,itemgen,this.getInflatedItems());			
+		}
+		//need more for events and functions
 	}
 	
 	

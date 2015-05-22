@@ -1,5 +1,6 @@
 package com.flipturnapps.quinton.item;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -24,6 +25,23 @@ public abstract class Item
 		this.setId(item.getId());
 		this.setName(item.getName());
 		this.addSubtypeAttributes(item.getItemAttributes());
+	}
+	public Item(World world)
+	{
+		this.setWorld(world);		
+	}
+	public Item(World world, String name, int id, String attributes)
+	{
+		this.setWorld(world);
+		this.setId(id);
+		this.setName(name);
+		this.addSubtypeAttributes(attributes);
+	}
+	public Item(World world, String name, int id)
+	{
+		this.setWorld(world);
+		this.setId(id);
+		this.setName(name);
 	}
 	public String getName() 
 	{
@@ -79,6 +97,14 @@ public abstract class Item
 		}
 		item.setItemAttributes(attributeString);
 		return item;
+	}
+	public static void inflateAndAddItem(World world, ItemGen itemgen, ArrayList<Item> inflatedItems)
+	{
+		Item inflatedItem = null;
+		if(itemgen.getItemType().equalsIgnoreCase(ItemBook.SUBTYPE_NAME))
+			inflatedItem = new ItemBook(world,itemgen);
+		inflatedItems.add(inflatedItem);
+		
 	}
 
 }

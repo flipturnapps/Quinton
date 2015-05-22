@@ -27,6 +27,20 @@ public class World
 	{
 		System.out.println(string);
 	}
+	public void inflate()
+	{
+		for(int i = 0; i < rooms.length; i++)
+		{
+			rooms[i].inflate();
+		}
+	}
+	public void deflate()
+	{
+		for(int i = 0; i < rooms.length; i++)
+		{
+			rooms[i].deflate();
+		}
+	}
 	
 	
 	

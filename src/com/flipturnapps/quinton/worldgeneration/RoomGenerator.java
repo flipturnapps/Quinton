@@ -1,16 +1,17 @@
 package com.flipturnapps.quinton.worldgeneration;
 
+import com.flipturnapps.quinton.item.ItemBook;
 import com.flipturnapps.quinton.xmldata.DirectionConstraints;
-import com.flipturnapps.quinton.xmldata.ItemGen;
 import com.flipturnapps.quinton.xmldata.Location;
 import com.flipturnapps.quinton.xmldata.Region;
 import com.flipturnapps.quinton.xmldata.Room;
+import com.flipturnapps.quinton.xmldata.World;
 
 public class RoomGenerator
 {
 	
 	
-	public Room generateStartRoom()
+	public Room generateStartRoom(World world)
 	{
 		Room startRoom = new Room();
 		startRoom.setName("A Dark Forest");
@@ -20,7 +21,9 @@ public class RoomGenerator
 		startRoom.setId(0);
 		startRoom.setDirConstraints(new DirectionConstraints());
 		startRoom.setRegion(new Region("forest"));
-		//put item in room
+		ItemBook startBook = new ItemBook(world,"Pamphlet",0);
+		startBook.setBooktext("Welcome to Qork. The Quinton-designed version of Zork!");
+		startRoom.addInflatedItem(startBook);
 		return startRoom;
 		
 	}

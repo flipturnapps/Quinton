@@ -7,14 +7,27 @@ import com.flipturnapps.quinton.xmldata.World;
 
 public class ItemBook extends Item 
 {
+	public ItemBook(World world, ItemGen item)
+	{
+		super(world,item);
+	}
+	public ItemBook(World world)
+	{
+		super(world);	
+	}
+	public ItemBook(World world, String name, int id, String attributes)
+	{
+		super(world,name,id,attributes);
+	}
+	public ItemBook(World world, String name, int id)
+	{
+		super(world,name,id);
+	}
+	
 	public static final String SUBTYPE_NAME = "book";
 	private static final String ATTRIBUTENAME_BOOKTEXT = "booktext";
 	private String booktext;
 	
-	public ItemBook(World world, ItemGen item) 
-	{
-		super(world, item);
-	}
 
 	@Override
 	public String getSubtypeName() 
