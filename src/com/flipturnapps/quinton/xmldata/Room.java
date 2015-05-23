@@ -28,6 +28,7 @@ public class Room
 		description = "description";
 		startNarration = "startNarration";
 		events = new ArrayList<EventGen>();
+		this.setItemContainer(new ItemContainer());
 		
 	}
 	public int getId() {

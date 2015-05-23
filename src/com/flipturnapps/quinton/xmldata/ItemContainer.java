@@ -11,6 +11,12 @@ public class ItemContainer
 {
 	private ArrayList<ItemGen> deflatedItems;
 	private ArrayList<Item> inflatedItems;
+	
+	public ItemContainer()
+	{
+		this.setDeflatedItems(new ArrayList<ItemGen>());
+		this.setInflatedItems(new ArrayList<Item>());
+	}
 	public ArrayList<ItemGen> getDeflatedItems() {
 		return deflatedItems;
 	}
@@ -45,6 +51,14 @@ public class ItemContainer
 			Item.inflateAndAddItem(world,itemgen,this.getInflatedItems());			
 		}
 		this.getDeflatedItems().clear();
+	}
+	public void addInflatedItem(Item i)
+	{
+		this.getInflatedItems().add(i);
+	}
+	public void addDeflatedItem(ItemGen i)
+	{
+		this.getDeflatedItems().add(i);
 	}
 
 }

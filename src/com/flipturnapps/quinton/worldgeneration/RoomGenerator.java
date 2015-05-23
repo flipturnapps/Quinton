@@ -23,7 +23,7 @@ public class RoomGenerator
 		startRoom.setRegion(new Region("forest"));
 		ItemBook startBook = new ItemBook(world,"Pamphlet",0);
 		startBook.setBooktext("Welcome to Qork. The Quinton-designed version of Zork!");
-		startRoom.addInflatedItem(startBook);
+		startRoom.getItemContainer().addInflatedItem(startBook);
 		return startRoom;
 		
 	}

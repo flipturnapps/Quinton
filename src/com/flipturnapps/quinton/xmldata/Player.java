@@ -10,11 +10,13 @@ public class Player
 	private double healthPercentage;
 	private Location location;
 	private String name;
+	private ItemContainer inventory;
 	public Player()
 	{
 		location = new Location();
 		name = "Quinton";
 		healthPercentage = 1;
+		this.setInventory(new ItemContainer());
 	}
 	public double getHealthPercentage() {
 		return healthPercentage;
@@ -41,6 +43,13 @@ public class Player
 	@XmlAttribute
 	public void setName(String name) {
 		this.name = name;
+	}
+	public ItemContainer getInventory() {
+		return inventory;
+	}
+	@XmlElement
+	public void setInventory(ItemContainer inventory) {
+		this.inventory = inventory;
 	}
 
 }
