@@ -9,7 +9,11 @@ public class World
 	private Room[] rooms;
 	private String name;
 	private Player player;
-	
+	public World ()
+	{
+		player = new Player();
+		name = "Qork World";
+	}
 	public String getName() {
 		return name;
 	}

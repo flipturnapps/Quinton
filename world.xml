@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<world>
+<world name="Qork World">
+    <player name="Quinton">
+        <healthPercentage>1.0</healthPercentage>
+        <inventory/>
+        <location x="0" y="0" z="0"/>
+    </player>
     <room id="0">
         <description>The deep darkness of the forest surrounds you.</description>
         <dirConstraints>
@@ -10,10 +15,11 @@
             <up>false</up>
             <west>true</west>
         </dirConstraints>
-        <inflatedItems>
-            <id>0</id>
-            <name>Pamphlet</name>
-        </inflatedItems>
+        <itemContainer>
+            <deflatedItems id="0" itemType="book" name="Pamphlet">
+                <itemAttributes>booktext:Welcome to Qork. The Quinton-designed version of Zork!</itemAttributes>
+            </deflatedItems>
+        </itemContainer>
         <location x="0" y="0" z="0"/>
         <name>A Dark Forest</name>
         <region name="forest"/>

@@ -17,6 +17,7 @@ public class WorldGenerator
 
 	private void go() {
 		World world = this.generateQWorld();
+		world.deflate();
 		try
 		{
 			File file = new File("world.xml");

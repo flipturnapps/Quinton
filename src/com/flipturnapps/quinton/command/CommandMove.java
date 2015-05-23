@@ -4,7 +4,7 @@ import com.flipturnapps.quinton.xmldata.DirectionConstraints;
 import com.flipturnapps.quinton.xmldata.Location;
 import com.flipturnapps.quinton.xmldata.World;
 
-public abstract class MoveCommand extends UserCommand 
+public abstract class CommandMove extends UserCommand 
 {
 	
 	protected abstract String getDirectionName();
@@ -25,7 +25,9 @@ public abstract class MoveCommand extends UserCommand
 	@Override
 	public String[] getAliases()
 	{
-		return null;
+		String[] aliases = new String[1];
+		aliases[0] = this.getCharAlias() + "";
+		return aliases;
 	}
 
 	@Override
@@ -36,5 +38,7 @@ public abstract class MoveCommand extends UserCommand
 		else
 			this.modifiyPlayerLocation(world.getPlayer().getLocation());
 	}
+	
+	protected abstract char getCharAlias();
 
 }
