@@ -39,7 +39,7 @@ public class World
 	{
 		for(int i = 0; i < rooms.length; i++)
 		{
-			rooms[i].deflate();
+			rooms[i].deflate(this);
 		}
 	}
 	public Room getPlayersRoom() 
@@ -60,6 +60,7 @@ public class World
 	{
 		return this.player;
 	}
+	
 	
 	
 	
