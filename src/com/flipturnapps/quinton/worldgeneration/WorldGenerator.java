@@ -3,6 +3,7 @@ import java.io.File;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import com.flipturnapps.quinton.xmldata.Room;
 import com.flipturnapps.quinton.xmldata.World;
@@ -10,32 +11,47 @@ import com.flipturnapps.quinton.xmldata.World;
 
 public class WorldGenerator 
 {
-	public static void main(String[] args)
+	public World generateAndSaveQWorld(File f) 
 	{
-		new WorldGenerator().go();
-	}
-
-	private void go() {
 		World world = this.generateQWorld();
 		world.deflate();
+		this.saveQWorld(world, f);
+		return world;
+	}
+	public World readQWorld(File f)
+	{
 		try
 		{
-			File file = new File("world.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(World.class);
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-			jaxbMarshaller.marshal(world, file);
-			jaxbMarshaller.marshal(world, System.out);
+			World w = (World) jaxbUnmarshaller.unmarshal(f);
+			return w;
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
-
+		return null;
 	}
+	public void saveQWorld(World w, File f)
+	{
+		try
+		{
+			JAXBContext jaxbContext = JAXBContext.newInstance(World.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			jaxbMarshaller.marshal(w, f);
+			jaxbMarshaller.marshal(w, System.out);
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
 	private World generateQWorld()
 	{
 		RoomGenerator gen = new RoomGenerator();
@@ -44,6 +60,7 @@ public class WorldGenerator
 		Room[] rooms = new Room[1];
 		rooms[0] = startRoom;
 		world.setRoom(rooms);
+		System.out.println("kek");
 		return world;
 	}
 
