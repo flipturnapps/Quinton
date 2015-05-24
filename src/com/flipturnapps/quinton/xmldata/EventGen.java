@@ -10,41 +10,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class EventGen 
 {
 	private String eventType;
-	private ArrayList<String> eventAttributes;
+	private String eventAttributes;
 	private ArrayList<FunctionGen> functions;
+	private int id;
+	
 	public EventGen()
 	{
 		functions = new ArrayList<FunctionGen>();
-		eventAttributes = new ArrayList<String>();
+		eventAttributes = "";
 		eventType = "none";
+		id = 0;
 	}
-	public String getEventType() {
+	
+	public String getEventType() 
+	{
 		return eventType;
 	}
 	@XmlAttribute
 	public void setEventType(String eventType) {
 		this.eventType = eventType;
 	}
-	public ArrayList<String> getEventAttributes() {
+	public String getEventAttributes() {
 		return eventAttributes;
 	}
 	@XmlElement
-	public void setEventAttributes(ArrayList<String> eventAttributes) {
+	public void setEventAttributes(String eventAttributes) {
 		this.eventAttributes = eventAttributes;
 	}
-	public ArrayList<FunctionGen> getFunctions() {
+	public ArrayList<FunctionGen> getFunction() {
 		return functions;
 	}
 	@XmlElement
-	public void setFunctions(ArrayList<FunctionGen> functions) {
+	public void setFunction(ArrayList<FunctionGen> functions) {
 		this.functions = functions;
 	}
-	public void addEventAttribute(String name,String value)
-	{
-		eventAttributes.add(name +":"+ value);
+	public int getId() {
+		return id;
 	}
-	public void addFunction(FunctionGen f)
-	{
-		this.functions.add(f);
+	@XmlAttribute
+	public void setId(int id) {
+		this.id = id;
 	}
+	public void addFuntctionGen(FunctionGen e)
+	{
+		this.getFunction().add(e);
+	}
+	
 }
+	

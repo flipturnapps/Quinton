@@ -27,6 +27,7 @@ public class WorldGenerator
 
 
 			World w = (World) jaxbUnmarshaller.unmarshal(f);
+			w.inflate();
 			return w;
 		}
 		catch(Exception ex)
@@ -37,6 +38,7 @@ public class WorldGenerator
 	}
 	public void saveQWorld(World w, File f)
 	{
+		w.deflate();
 		try
 		{
 			JAXBContext jaxbContext = JAXBContext.newInstance(World.class);
@@ -51,6 +53,7 @@ public class WorldGenerator
 		{
 			ex.printStackTrace();
 		}
+		w.inflate();
 	}
 	private World generateQWorld()
 	{

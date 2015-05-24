@@ -5,7 +5,8 @@ import java.io.File;
 import com.flipturnapps.quinton.worldgeneration.WorldGenerator;
 import com.flipturnapps.quinton.xmldata.World;
 
-public class QuintonMain {
+public class QuintonMain 
+{
 
 	private static final boolean SHOULD_READ_WORLD_FROM_FILE = true;
 	public static void main(String[] args) 
