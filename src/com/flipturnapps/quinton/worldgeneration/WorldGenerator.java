@@ -11,14 +11,14 @@ import com.flipturnapps.quinton.xmldata.World;
 
 public class WorldGenerator 
 {
-	public World generateAndSaveQWorld(File f) 
+	public World generateAndSaveTestWorld(File f) 
 	{
-		World world = this.generateQWorld();
+		World world = this.generateTestWorld();
 		world.deflate();
-		this.saveQWorld(world, f);
+		this.saveWorld(world, f);
 		return world;
 	}
-	public World readQWorld(File f)
+	public World readWorld(File f)
 	{
 		try
 		{
@@ -36,7 +36,7 @@ public class WorldGenerator
 		}
 		return null;
 	}
-	public void saveQWorld(World w, File f)
+	public void saveWorld(World w, File f)
 	{
 		w.deflate();
 		try
@@ -55,9 +55,9 @@ public class WorldGenerator
 		}
 		w.inflate();
 	}
-	private World generateQWorld()
+	private World generateTestWorld()
 	{
-		RoomGenerator gen = new RoomGenerator();
+		TestRoomGenerator gen = new TestRoomGenerator();
 		World world = new World();
 		Room startRoom = gen.generateStartRoom(world);
 		Room[] rooms = new Room[1];
