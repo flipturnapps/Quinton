@@ -1,9 +1,9 @@
 package com.flipturnapps.quinton.xmldata;
-import java.util.ArrayList;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.flipturnapps.quinton.room.RoomCommand;
 
 @XmlRootElement
 public class Room 
@@ -16,6 +16,8 @@ public class Room
 	private Region region;
 	private Location location;
 	private ItemContainer itemContainer;
+	private RoomCommand command;
+	private int roomCommandId;
 	public Room()
 	{
 		region = new Region();
@@ -91,13 +93,28 @@ public class Room
 	public void inflate(World world)
 	{
 		this.getItemContainer().inflate(world);
-		//more to inflate
+		this.setCommand(RoomCommand.createRoomCommand(this.getRoomCommandId()));
 	}
 	public void deflate(World world)
 	{
 		this.getItemContainer().deflate();
-		//more to deflate
+		this.setCommand(null);
 	}
+	public int getRoomCommandId() {
+		return roomCommandId;
+	}
+	@XmlAttribute
+	public void setRoomCommandId(int roomCommandId) {
+		this.roomCommandId = roomCommandId;
+	}
+	public RoomCommand getCommand() {
+		return command;
+	}
+	private void setCommand(RoomCommand command)
+	{
+		this.command = command;
+	}
+	
 	
 	
 	
