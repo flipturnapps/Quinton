@@ -1,0 +1,18 @@
+Helloz.
+
+You will have noticed i deleted your branch.  Those changes have been moved to alphadev.
+
+CommandRoom isn't actually a thing.  Rather, RoomCommand and its children, 
+such as MirrorRoomCommand can use commands on a room by room basis. (you just need another subclass of RoomCommand)
+
+To see these beautiful changes and dev your own fallow these steps.
+
+Right click on Quinton [master] and switch to branch "other..."
+
+Click on remote tracking and then on alphadev
+
+Then checkout as local branch
+
+Name it testworlddev or whatever
+
+:)
