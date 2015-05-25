@@ -62,4 +62,14 @@ public class ItemBook extends Item
 	public void setBooktext(String booktext) {
 		this.booktext = booktext;
 	}
+	@Override
+	public String[] getNounSynonyms() 
+	{
+		return null;
+	}
+	@Override
+	public String[] getVerbSynonyms() 	
+	{
+		return new String[]{"read"};
+	}
 }
