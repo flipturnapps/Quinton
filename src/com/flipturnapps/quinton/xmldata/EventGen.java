@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class EventGen 
 {
-	private String eventType;
+	private int eventTypeId;
 	private String eventAttributes;
 	private ArrayList<FunctionGen> functions;
 	private int id;
@@ -18,18 +18,10 @@ public class EventGen
 	{
 		functions = new ArrayList<FunctionGen>();
 		eventAttributes = "";
-		eventType = "none";
+		setEventTypeId(-1);
 		id = 0;
 	}
 	
-	public String getEventType() 
-	{
-		return eventType;
-	}
-	@XmlAttribute
-	public void setEventType(String eventType) {
-		this.eventType = eventType;
-	}
 	public String getEventAttributes() {
 		return eventAttributes;
 	}
@@ -54,6 +46,14 @@ public class EventGen
 	public void addFuntctionGen(FunctionGen e)
 	{
 		this.getFunction().add(e);
+	}
+
+	public int getEventTypeId() {
+		return eventTypeId;
+	}
+@XmlAttribute
+	public void setEventTypeId(int eventTypeId) {
+		this.eventTypeId = eventTypeId;
 	}
 	
 }

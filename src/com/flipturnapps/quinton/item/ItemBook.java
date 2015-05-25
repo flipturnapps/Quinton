@@ -2,6 +2,7 @@ package com.flipturnapps.quinton.item;
 
 import java.util.HashMap;
 
+import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.xmldata.ItemGen;
 import com.flipturnapps.quinton.xmldata.World;
 
@@ -23,16 +24,14 @@ public class ItemBook extends Item
 	{
 		super(world,name,id);
 	}
-	
-	public static final String SUBTYPE_NAME = "book";
 	private static final String ATTRIBUTENAME_BOOKTEXT = "booktext";
 	private String booktext;
 	
 
 	@Override
-	public String getSubtypeName() 
+	public int getSubtypeId() 
 	{
-		return SUBTYPE_NAME;
+		return ItemId.ITEMTYPE_BOOK;
 	}
 
 	@Override
@@ -53,7 +52,7 @@ public class ItemBook extends Item
 	@Override
 	protected void processSubtypeAttribute(String name, String value) 
 	{
-		if(name.equalsIgnoreCase("ATTRIBUTENAME_BOOKTEXT"))
+		if(name.equalsIgnoreCase(ATTRIBUTENAME_BOOKTEXT))
 			booktext = value;
 
 	}

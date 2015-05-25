@@ -15,22 +15,13 @@ public abstract class Event
 	private static final String ATTRIBUTE_SEPARATOR_CHARACTER = ",";
 	private static final String KEYVAL_SEPARATOR_CHARACTER = ":";
 	
-	private String name;
 	private int id;
 	private World world;
-	public abstract String getSubtypeName();
+	public abstract int getSubtypeId();
 	public abstract void useAsSubtype();
 	public abstract HashMap<String,String> getSubtypeAttributes();
 	protected abstract void processSubtypeAttribute(String name, String value);
-	//TODO define constructors
-	public String getName() 
-	{
-		return name;
-	}
-	public void setName(String name) 
-	{
-		this.name = name;
-	}
+	//TODO define constructors	
 	public int getId()
 	{
 		return id;
@@ -61,7 +52,7 @@ public abstract class Event
 	{
 		EventGen event = new EventGen();
 		event.setId(this.getId());
-		event.setEventType(this.getSubtypeName());
+		event.setEventTypeId(this.getSubtypeId());
 		String attributeString = "";
 		HashMap<String,String> attributes = this.getSubtypeAttributes();
 		Set<String> keys = attributes.keySet();

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ItemGen 
 {
 	private String name="item";
-	private String itemType="default";
+	private int itemTypeId=-1;
 	private int id=-1;
 	private String itemAttributes;
 	public ItemGen()
@@ -30,12 +30,14 @@ public class ItemGen
 	{
 		this.name = name;
 	}
-	public String getItemType() {
-		return itemType;
+	public int getItemTypeId()
+	{
+		return itemTypeId;
 	}
 	@XmlAttribute
-	public void setItemType(String itemType) {
-		this.itemType = itemType;
+	public void setItemTypeId(int i) 
+	{
+		this.itemTypeId = i;
 	}
 
 	public int getId() {

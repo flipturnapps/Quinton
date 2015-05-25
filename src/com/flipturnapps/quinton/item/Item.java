@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.xmldata.ItemGen;
 import com.flipturnapps.quinton.xmldata.World;
 
@@ -15,7 +16,7 @@ public abstract class Item
 	private String name;
 	private int id;
 	private World world;
-	public abstract String getSubtypeName();
+	public abstract int getSubtypeId();
 	public abstract void useAsSubtype();
 	public abstract HashMap<String,String> getSubtypeAttributes();
 	protected abstract void processSubtypeAttribute(String name, String value);
@@ -82,7 +83,7 @@ public abstract class Item
 		ItemGen item = new ItemGen();
 		item.setId(this.getId());
 		item.setName(this.getName());
-		item.setItemType(this.getSubtypeName());
+		item.setItemTypeId(this.getSubtypeId());
 		String attributeString = "";
 		HashMap<String,String> attributes = this.getSubtypeAttributes();
 		Set<String> keys = attributes.keySet();
@@ -101,7 +102,7 @@ public abstract class Item
 	public static void inflateAndAddItem(World world, ItemGen itemgen, ArrayList<Item> inflatedItems)
 	{
 		Item inflatedItem = null;
-		if(itemgen.getItemType().equalsIgnoreCase(ItemBook.SUBTYPE_NAME))
+		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_BOOK)
 			inflatedItem = new ItemBook(world,itemgen);
 		inflatedItems.add(inflatedItem);
 		
