@@ -3,6 +3,7 @@ package com.flipturnapps.quinton.worldgeneration;
 import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.id.RoomId;
 import com.flipturnapps.quinton.item.ItemBook;
+import com.flipturnapps.quinton.room.MirrorRoomCommand;
 import com.flipturnapps.quinton.xmldata.DirectionConstraints;
 import com.flipturnapps.quinton.xmldata.Location;
 import com.flipturnapps.quinton.xmldata.Region;
@@ -29,5 +30,21 @@ public class TestRoomGenerator
 		return startRoom;
 		
 	}
+	
+	public Room generateMirrorRoom(World world)
+	{
+		Room mirrorRoom = new Room();
+		mirrorRoom.setName("Mirror Room");
+		mirrorRoom.setDescription("There are no exits in the Room. A mirror hangs on the north wall.");
+		mirrorRoom.setStartNarration("You find yourself in a mirror room.");
+		mirrorRoom.setLocation(new Location(0,0,-1));
+		mirrorRoom.setId(RoomId.ROOM_MIRRORROOM);
+		mirrorRoom.setDirConstraints(new DirectionConstraints(false,false,false,false,false,false));
+		mirrorRoom.setRegion(new Region("underground"));
+		mirrorRoom.setCommandRoom(new MirrorRoomCommand());
+		return mirrorRoom;
+		
+	}
+	
 }
 

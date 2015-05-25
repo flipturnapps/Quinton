@@ -93,12 +93,12 @@ public class Room
 	public void inflate(World world)
 	{
 		this.getItemContainer().inflate(world);
-		this.setCommand(RoomCommand.createRoomCommand(this.getRoomCommandId()));
+		this.setCommandRoom(RoomCommand.createRoomCommand(this.getRoomCommandId()));
 	}
 	public void deflate(World world)
 	{
 		this.getItemContainer().deflate();
-		this.setCommand(null);
+		this.setCommandRoom(null);
 	}
 	public int getRoomCommandId() {
 		return roomCommandId;
@@ -107,10 +107,10 @@ public class Room
 	public void setRoomCommandId(int roomCommandId) {
 		this.roomCommandId = roomCommandId;
 	}
-	public RoomCommand getCommand() {
+	public RoomCommand getCommandRoom() {
 		return command;
 	}
-	private void setCommand(RoomCommand command)
+	public void setCommandRoom(RoomCommand command)
 	{
 		this.command = command;
 	}
