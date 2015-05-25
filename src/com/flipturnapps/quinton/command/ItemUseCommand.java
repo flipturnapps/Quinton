@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import com.flipturnapps.kevinLibrary.command.Command;
 import com.flipturnapps.kevinLibrary.command.SimpleCommand;
+import com.flipturnapps.quinton.item.Item;
 
 public class ItemUseCommand extends SimpleCommand 
 {
+
+	private static ArrayList<Item> itemlist;
 
 	@Override
 	public String getName()
@@ -63,21 +66,34 @@ public class ItemUseCommand extends SimpleCommand
 	}
 
 	@Override
-	public ArrayList<String> getPermissionsCanHave() {
-		// TODO Auto-generated method stub
+	public ArrayList<String> getPermissionsCanHave()
+	{
 		return null;
 	}
 
 	@Override
-	public boolean objectDataOK(Object data) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean objectDataOK(Object data) 
+	{
+		return true;
 	}
 
 	@Override
-	public boolean permProtected() {
-		// TODO Auto-generated method stub
+	public boolean permProtected() 
+	{
 		return false;
+	}
+	public boolean namesMatch(String verb, String[] nouns)
+	{
+		//TODO finish names match method
+		return false;
+	}
+
+	public static void registerItem(Item item)
+	{
+		if(itemlist == null)
+			itemlist = new ArrayList<Item>();
+		itemlist.add(item);
+		
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.flipturnapps.quinton.command.ItemUseCommand;
 import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.xmldata.ItemGen;
 import com.flipturnapps.quinton.xmldata.World;
@@ -106,6 +107,7 @@ public abstract class Item
 		Item inflatedItem = null;
 		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_BOOK)
 			inflatedItem = new ItemBook(world,itemgen);
+		ItemUseCommand.registerItem(inflatedItem);
 		inflatedItems.add(inflatedItem);
 		
 	}
