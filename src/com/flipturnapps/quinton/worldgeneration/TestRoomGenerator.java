@@ -9,7 +9,7 @@ import com.flipturnapps.quinton.xmldata.Region;
 import com.flipturnapps.quinton.xmldata.Room;
 import com.flipturnapps.quinton.xmldata.World;
 
-public class RoomGenerator
+public class TestRoomGenerator
 {
 	
 	

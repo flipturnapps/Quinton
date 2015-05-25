@@ -21,9 +21,9 @@ public class QuintonMain
 		World world;
 		WorldGenerator gen = new WorldGenerator();
 		if(generate)
-			world = gen.generateAndSaveQWorld(this.getWorldsaveFile());
+			world = gen.generateAndSaveTestWorld(this.getWorldsaveFile());
 		else
-			world = gen.readQWorld(this.getWorldsaveFile());
+			world = gen.readWorld(this.getWorldsaveFile());
 	}
 	public File getWorldsaveFile()
 	{
