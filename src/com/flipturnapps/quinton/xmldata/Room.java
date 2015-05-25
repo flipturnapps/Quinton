@@ -12,7 +12,6 @@ public class Room
 	private String name ="room";
 	private String description = "description";
 	private String startNarration = "";
-	private ArrayList<EventGen> events;	
 	private DirectionConstraints dirConstraints;
 	private Region region;
 	private Location location;
@@ -25,7 +24,6 @@ public class Room
 		name = "RoomName";
 		description = "description";
 		startNarration = "startNarration";
-		events = new ArrayList<EventGen>();
 		this.setItemContainer(new ItemContainer());
 		
 	}
@@ -58,17 +56,7 @@ public class Room
 	public void setStartNarration(String startNarration) {
 		this.startNarration = startNarration;
 	}
-	public ArrayList<EventGen> getEvent() {
-		return events;
-	}
-	@XmlElement
-	public void setEvent(ArrayList<EventGen> events) {
-		this.events = events;
-	}
-	public void addEvent(EventGen event)
-	{
-		this.events.add(event);
-	}
+	
 	
 	
 	public DirectionConstraints getDirConstraints() {
