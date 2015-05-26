@@ -65,11 +65,17 @@ public class QuintonMain
 				world.getPlayer().setLocation(lastRoom.getLocation().copy());
 			}
 			itemUseCommand.clearItemList();
-			for(int i = 0; i < world.getPlayer().getInventory().getInflatedItems().size(); i++)
-				itemUseCommand.registerItem(world.getPlayer().getInventory().getInflatedItems().get(i));
-			for(int i = 0; i < room.getItemContainer().getInflatedItems().size(); i++)
-				itemUseCommand.registerItem(room.getItemContainer().getInflatedItems().get(i));
-
+			try
+			{
+				for(int i = 0; i < world.getPlayer().getInventory().getInflatedItems().size(); i++)
+					itemUseCommand.registerItem(world.getPlayer().getInventory().getInflatedItems().get(i));
+			}
+			catch (Exception ex){}
+			try{
+				for(int i = 0; i < room.getItemContainer().getInflatedItems().size(); i++)
+					itemUseCommand.registerItem(room.getItemContainer().getInflatedItems().get(i));
+			}
+			catch (Exception ex){}
 			System.out.println();
 			System.out.println(room.getName());
 			if(room.getExploredByIdsList() == null)
@@ -82,6 +88,17 @@ public class QuintonMain
 			}
 			System.out.println("-DEBUG-Playerlocation: " + world.getPlayer().getLocation() + "");
 			System.out.println("-DEBUG-Roomlocation: " + room.getLocation() + "");
+			try
+			{
+				if(room.getItemContainer().getInflatedItems().size() > 0)
+				{
+					System.out.println("You see beside you: ");
+					for(int i = 0; i < room.getItemContainer().getInflatedItems().size(); i++)
+						System.out.println(room.getItemContainer().getInflatedItems().get(i).getName());
+				}
+			}
+			catch(Exception ex)
+			{}
 			System.out.print(">");
 
 

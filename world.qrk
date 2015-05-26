@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <world name="Qork World">
-    <player name="Quinton">
+    <player id="1" name="Quinton">
         <healthPercentage>1.0</healthPercentage>
         <inventory/>
         <location x="0" y="0" z="0"/>

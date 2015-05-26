@@ -64,7 +64,8 @@ public class ItemUseCommand extends SimpleCommand
 	public Object execute(String verb, String[] nouns, Object data) 
 	{
 		Item useItem = this.itemList.get(this.getItemIndexUsed(verb, nouns));
-		useItem.useAsSubtype();
+		boolean consumed = useItem.useAsSubtype();
+		
 		return null;
 	}
 
