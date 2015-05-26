@@ -64,7 +64,6 @@ public class WorldGenerator
 		rooms[0] = startRoom;
 		world.setRoom(rooms);
 		System.out.println("kek");
-		world.inflate();
 		return world;
 	}
 
