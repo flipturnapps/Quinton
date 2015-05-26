@@ -68,6 +68,7 @@ public class WorldGenerator
 		rooms[3] = gen.generateForestRoom(world, new Location(0,0,1));
 		world.setRoom(rooms);
 		System.out.println("kek");
+		world.inflate();
 		return world;
 	}
 
