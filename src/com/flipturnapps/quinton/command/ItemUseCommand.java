@@ -93,6 +93,8 @@ public class ItemUseCommand extends SimpleCommand
 	}
 	private int getItemIndexUsed(String verb, String[] nouns)
 	{
+		if(nouns == null || nouns.length == 0)
+			return -1; 
 		int itemIndex = -1;
 		String nounString = "";
 		for (int i = 0; i < nouns.length; i++)
@@ -104,8 +106,12 @@ public class ItemUseCommand extends SimpleCommand
 		for(int i = 0; i < itemList.size(); i++)
 		{
 			String[] nounList = itemList.get(i).getNounSynonyms();
+			if(nounList == null)
+				continue;
 			boolean nounsMatch = ArrayHelper.contains(nounString, nounList);
 			String[] verbList = itemList.get(i).getVerbSynonyms();
+			if(verbList == null)
+				continue;
 			boolean verbsMatch = ArrayHelper.contains(verb, verbList) || verb.equalsIgnoreCase("use");
 			if(nounsMatch && verbsMatch)
 				itemIndex = i;

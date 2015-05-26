@@ -55,10 +55,11 @@ public class QuintonMain
 			System.out.println(room.getName());
 			System.out.println(room.getStartNarration());
 			System.out.println(room.getDescription());			
-			System.out.println(">");
+			System.out.print(">");
 			String input = scanner.nextLine();
 			try
 			{
+				System.out.println(input);
 				parser.runCommand(input, null, world);
 			} 
 			catch (CommandParseException e) 
