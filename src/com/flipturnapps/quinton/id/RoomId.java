@@ -5,7 +5,7 @@ public class RoomId
 	public static final int ROOM_STARTFOREST = 0;
 	public static final int ROOM_MIRRORROOM = 1;
 	
-	public static final int ROOMCOMMAND_MIRRORROOM = 1;
+	public static final int ROOMCOMMAND_MIRRORROOM = 0;
 
 	
 }
