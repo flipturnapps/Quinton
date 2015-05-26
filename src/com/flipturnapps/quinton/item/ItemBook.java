@@ -35,10 +35,11 @@ public class ItemBook extends Item
 	}
 
 	@Override
-	public void useAsSubtype() 
+	public boolean useAsSubtype() 
 	{
 		this.getWorld().outputLine("You read the " + this.getName() + ".  It reads: ");
 		this.getWorld().outputLine(booktext);
+		return false;
 	}
 
 	@Override

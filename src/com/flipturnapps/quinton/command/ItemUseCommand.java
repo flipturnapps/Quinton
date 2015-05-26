@@ -10,7 +10,7 @@ import com.flipturnapps.quinton.item.Item;
 public class ItemUseCommand extends SimpleCommand 
 {
 
-	private static ArrayList<Item> itemList;
+	private  ArrayList<Item> itemList;
 
 	@Override
 	public String getName()
@@ -119,7 +119,13 @@ public class ItemUseCommand extends SimpleCommand
 		return itemIndex;
 	}
 
-	public static void registerItem(Item item)
+	public void clearItemList()
+	{
+		if(itemList == null)
+			itemList = new ArrayList<Item>();
+		itemList.clear();
+	}
+	public void registerItem(Item item)
 	{
 		if(itemList == null)
 			itemList = new ArrayList<Item>();

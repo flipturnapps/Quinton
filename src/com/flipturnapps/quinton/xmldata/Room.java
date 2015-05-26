@@ -1,4 +1,6 @@
 package com.flipturnapps.quinton.xmldata;
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,6 +11,7 @@ import com.flipturnapps.quinton.room.RoomCommand;
 public class Room 
 {
 	private static final String ROOM_COMMAND_ID_SEPARATOR = ",";
+	private static final String EXPLORED_BY_ID_SEPARATOR = ",";
 	private int id;
 	private String name ="room";
 	private String description = "description";
@@ -19,6 +22,8 @@ public class Room
 	private ItemContainer itemContainer;
 	private RoomCommand[] commands;
 	private String roomCommandIds;
+	private String exploredByIdsString;
+	private ArrayList<Integer> exploredByIdsList;
 	public Room()
 	{
 		region = new Region();
@@ -95,11 +100,13 @@ public class Room
 	{
 		this.getItemContainer().inflate(world);
 		this.inflateCommands();
+		this.inflateExploredByIds();
 	}
 	public void deflate(World world)
 	{
 		this.getItemContainer().deflate();
 		this.deflateCommands();
+		this.deflateExploredByIds();
 	}
 	private void deflateCommands()
 	{
@@ -133,6 +140,38 @@ public class Room
 			this.setRoomCommands(commands);	
 		}
 	}
+	private void deflateExploredByIds()
+	{
+		String idString = "";
+		ArrayList<Integer> ids = this.getExploredByIdsList();
+		if(ids != null)
+		{
+			for (int i = 0; i < ids.size(); i++)
+			{				
+				idString += (ids.get(i) + "");
+				if(i!=(ids.size()-1))
+				{
+					idString += Room.EXPLORED_BY_ID_SEPARATOR;
+				}
+			}
+			this.setExploredByIdsString(idString);
+		}
+		this.setExploredByIdsList(null);
+	}
+	private void inflateExploredByIds()
+	{	
+		if(this.getExploredByIdsString() != null && !(this.getExploredByIdsString()).equals(""))
+		{
+			String idStringList = this.getExploredByIdsString();
+			String[] idStrings = idStringList.split(Room.EXPLORED_BY_ID_SEPARATOR);
+			ArrayList<Integer> ids = new ArrayList<Integer>();
+			for (int i = 0; i < idStrings.length; i++)
+			{
+				ids.add(Integer.parseInt(idStrings[i]));
+			}
+			this.setExploredByIdsList(ids);	
+		}
+	}
 
 	public RoomCommand[] getRoomCommands() {
 		return commands;
@@ -148,9 +187,17 @@ public class Room
 	public void setRoomCommandIds(String roomCommandIds) {
 		this.roomCommandIds = roomCommandIds;
 	}
-
-
-
-
-
+	public String getExploredByIdsString() {
+		return exploredByIdsString;
+	}
+	@XmlElement
+	public void setExploredByIdsString(String exploredByIdsString) {
+		this.exploredByIdsString = exploredByIdsString;
+	}
+	public ArrayList<Integer> getExploredByIdsList() {
+		return exploredByIdsList;
+	}
+	public void setExploredByIdsList(ArrayList<Integer> exploredByIdsList) {
+		this.exploredByIdsList = exploredByIdsList;
+	}
 }

@@ -49,7 +49,8 @@ public class QuintonMain
 		commands.add(new CommandMoveSouth());
 		commands.add(new CommandMoveWest());
 		commands.add(new CommandMoveEast());
-		commands.add(new ItemUseCommand());
+		ItemUseCommand itemUseCommand = new ItemUseCommand();
+		commands.add(itemUseCommand);
 		BasicCommandParser parser = new BasicCommandParser(commands);
 		Scanner scanner = new Scanner(System.in);
 		Room lastRoom = null;
@@ -63,13 +64,27 @@ public class QuintonMain
 				room = lastRoom;
 				world.getPlayer().setLocation(lastRoom.getLocation().copy());
 			}
+			itemUseCommand.clearItemList();
+			for(int i = 0; i < world.getPlayer().getInventory().getInflatedItems().size(); i++)
+				itemUseCommand.registerItem(world.getPlayer().getInventory().getInflatedItems().get(i));
+			for(int i = 0; i < room.getItemContainer().getInflatedItems().size(); i++)
+				itemUseCommand.registerItem(room.getItemContainer().getInflatedItems().get(i));
+
 			System.out.println();
 			System.out.println(room.getName());
-			System.out.println(room.getStartNarration());
-			System.out.println(room.getDescription());
-			System.out.println("Playerlocation: " + world.getPlayer().getLocation() + "");
-			System.out.println("Roomlocation: " + room.getLocation() + "");
+			if(room.getExploredByIdsList() == null)
+				room.setExploredByIdsList(new ArrayList<Integer>());
+			if(!(room.getExploredByIdsList().contains(world.getPlayer().getId())))
+			{
+				room.getExploredByIdsList().add(world.getPlayer().getId());
+				System.out.println(room.getStartNarration());
+				System.out.println(room.getDescription());
+			}
+			System.out.println("-DEBUG-Playerlocation: " + world.getPlayer().getLocation() + "");
+			System.out.println("-DEBUG-Roomlocation: " + room.getLocation() + "");
 			System.out.print(">");
+
+
 			String input = scanner.nextLine();
 			try
 			{

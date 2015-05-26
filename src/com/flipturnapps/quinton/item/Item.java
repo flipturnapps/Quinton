@@ -18,7 +18,10 @@ public abstract class Item
 	private int id;
 	private World world;
 	public abstract int getSubtypeId();
-	public abstract void useAsSubtype();
+	/**
+	@return whether or not the item was consumed in its usage
+	*/
+	public abstract boolean useAsSubtype();
 	public abstract HashMap<String,String> getSubtypeAttributes();
 	protected abstract void processSubtypeAttribute(String name, String value);
 	public abstract String[] getNounSynonyms();
@@ -107,7 +110,6 @@ public abstract class Item
 		Item inflatedItem = null;
 		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_BOOK)
 			inflatedItem = new ItemBook(world,itemgen);
-		ItemUseCommand.registerItem(inflatedItem);
 		inflatedItems.add(inflatedItem);
 		
 	}
