@@ -8,7 +8,7 @@
     <room id="0" name="A Dark Forest">
         <description>The deep darkness of the forest surrounds you.</description>
         <dirConstraints>
-            <down>false</down>
+            <down>true</down>
             <east>true</east>
             <north>true</north>
             <south>true</south>
