@@ -60,10 +60,10 @@ public class WorldGenerator
 		TestRoomGenerator gen = new TestRoomGenerator();
 		World world = new World();
 		Room startRoom = gen.generateStartRoom(world);
-		Room[] rooms = new Room[2];
+		Room[] rooms = new Room[1];
 		rooms[0] = startRoom;
-		rooms[1] = gen.generateMirrorRoom(world);
 		world.setRoom(rooms);
+		System.out.println("kek");
 		world.inflate();
 		return world;
 	}
