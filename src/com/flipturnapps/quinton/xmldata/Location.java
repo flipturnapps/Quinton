@@ -64,5 +64,14 @@ public class Location
 			return false;
 		return true;
 	}
+	public String toString()
+	{
+		return "Location: ("+ this.getX() + "," + this.getY() + "," + this.getZ() + ")";
+	}
+
+	public Location copy()
+	{
+		return new Location (x,y,z);
+	}
 
 }
