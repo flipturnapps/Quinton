@@ -8,6 +8,7 @@ import com.flipturnapps.quinton.room.RoomCommand;
 @XmlRootElement
 public class Room 
 {
+	private static final String ROOM_COMMAND_ID_SEPARATOR = ",";
 	private int id;
 	private String name ="room";
 	private String description = "description";
@@ -16,8 +17,8 @@ public class Room
 	private Region region;
 	private Location location;
 	private ItemContainer itemContainer;
-	private RoomCommand command;
-	private int roomCommandId;
+	private RoomCommand[] commands;
+	private String roomCommandIds;
 	public Room()
 	{
 		region = new Region();
@@ -93,26 +94,53 @@ public class Room
 	public void inflate(World world)
 	{
 		this.getItemContainer().inflate(world);
-		this.setCommandRoom(RoomCommand.createRoomCommand(this.getRoomCommandId()));
+		this.inflateCommands();
 	}
 	public void deflate(World world)
 	{
 		this.getItemContainer().deflate();
-		this.setCommandRoom(null);
+		this.deflateCommands();
 	}
-	public int getRoomCommandId() {
-		return roomCommandId;
-	}
-	@XmlAttribute
-	public void setRoomCommandId(int roomCommandId) {
-		this.roomCommandId = roomCommandId;
-	}
-	public RoomCommand getCommandRoom() {
-		return command;
-	}
-	public void setCommandRoom(RoomCommand command)
+	private void deflateCommands()
 	{
-		this.command = command;
+		String idString = "";
+		RoomCommand[] commands = this.getRoomCommands();
+		for (int i = 0; i < commands.length; i++)
+		{
+			idString += commands[i].getRoomCommandId();
+			if(i!=(commands.length-1))
+			{
+				idString += Room.ROOM_COMMAND_ID_SEPARATOR;
+			}
+		}
+		this.setRoomCommandIds(idString);
+		this.setRoomCommands(null);
+	}
+	private void inflateCommands()
+	{
+		String[] idStrings = this.getRoomCommandIds().split(ROOM_COMMAND_ID_SEPARATOR);
+		RoomCommand[] commands = new RoomCommand[idStrings.length];
+		for (int i = 0; i < idStrings.length; i++)
+		{
+			commands[i] = RoomCommand.createRoomCommand(Integer.parseInt(idStrings[i]));
+		}
+		this.setRoomCommands(commands);
+		this.setRoomCommandIds(null);
+	}
+	
+	public RoomCommand[] getRoomCommands() {
+		return commands;
+	}
+	public void setRoomCommands(RoomCommand[] command)
+	{
+		this.commands = command;
+	}
+	public String getRoomCommandIds() {
+		return roomCommandIds;
+	}
+	@XmlElement
+	public void setRoomCommandIds(String roomCommandIds) {
+		this.roomCommandIds = roomCommandIds;
 	}
 	
 	

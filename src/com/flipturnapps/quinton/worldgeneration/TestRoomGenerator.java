@@ -4,6 +4,7 @@ import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.id.RoomId;
 import com.flipturnapps.quinton.item.ItemBook;
 import com.flipturnapps.quinton.room.MirrorRoomCommand;
+import com.flipturnapps.quinton.room.RoomCommand;
 import com.flipturnapps.quinton.xmldata.DirectionConstraints;
 import com.flipturnapps.quinton.xmldata.Location;
 import com.flipturnapps.quinton.xmldata.Region;
@@ -41,7 +42,7 @@ public class TestRoomGenerator
 		mirrorRoom.setId(RoomId.ROOM_MIRRORROOM);
 		mirrorRoom.setDirConstraints(new DirectionConstraints(false,false,false,false,false,false));
 		mirrorRoom.setRegion(new Region("underground"));
-		mirrorRoom.setCommandRoom(new MirrorRoomCommand());
+		mirrorRoom.setRoomCommands(new RoomCommand[]{new MirrorRoomCommand()});
 		return mirrorRoom;
 		
 	}
