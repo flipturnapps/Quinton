@@ -11,13 +11,13 @@ public abstract class UserCommand extends SimpleCommand
 	@Override
 	public int getMaximumParams() 
 	{
-		return 2;
+		return 1;
 	}
 
 	@Override
 	public int getMinimumParams()
 	{
-		return 1;
+		return 0;
 	}
 
 	@Override

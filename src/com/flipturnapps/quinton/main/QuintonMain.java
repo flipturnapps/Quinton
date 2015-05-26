@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import com.flipturnapps.kevinLibrary.command.BasicCommandParser;
 import com.flipturnapps.kevinLibrary.command.Command;
 import com.flipturnapps.kevinLibrary.command.CommandParseException;
@@ -72,6 +74,7 @@ public class QuintonMain
 			} 
 			catch (IncorrectDataException e)
 			{
+				System.out.println(e.getErrorTypeText());
 				System.out.println("The program is broken.");
 			}
 		}

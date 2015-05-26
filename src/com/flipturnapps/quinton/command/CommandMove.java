@@ -16,6 +16,19 @@ public abstract class CommandMove extends UserCommand
 		return this.getDirectionName();
 	}
 
+
+	@Override
+	public int getMaximumParams() 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getMinimumParams()
+	{
+		return 0;
+	}
+	
 	@Override
 	public String getHelpText()
 	{
