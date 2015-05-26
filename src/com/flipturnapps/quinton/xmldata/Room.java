@@ -28,7 +28,8 @@ public class Room
 		description = "description";
 		startNarration = "startNarration";
 		this.setItemContainer(new ItemContainer());
-		
+		this.setRoomCommandIds(null);
+
 	}
 	public int getId() {
 		return id;
@@ -37,11 +38,12 @@ public class Room
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	@XmlElement
+	
+	@XmlAttribute
 	public void setName(String name) {
 		this.name = name;
 	}	
@@ -59,9 +61,7 @@ public class Room
 	public void setStartNarration(String startNarration) {
 		this.startNarration = startNarration;
 	}
-	
-	
-	
+
 	public DirectionConstraints getDirConstraints() {
 		return dirConstraints;
 	}
@@ -69,8 +69,8 @@ public class Room
 	public void setDirConstraints(DirectionConstraints dirConstraints) {
 		this.dirConstraints = dirConstraints;
 	}
-	
-	
+
+
 	public Location getLocation() {
 		return location;
 	}
@@ -105,29 +105,35 @@ public class Room
 	{
 		String idString = "";
 		RoomCommand[] commands = this.getRoomCommands();
-		for (int i = 0; i < commands.length; i++)
+		if(commands != null)
 		{
-			idString += commands[i].getRoomCommandId();
-			if(i!=(commands.length-1))
-			{
-				idString += Room.ROOM_COMMAND_ID_SEPARATOR;
+			for (int i = 0; i < commands.length; i++)
+			{				
+				idString += (commands[i].getRoomCommandId() + "");
+				if(i!=(commands.length-1))
+				{
+					idString += Room.ROOM_COMMAND_ID_SEPARATOR;
+				}
 			}
+			this.setRoomCommandIds(idString);
 		}
-		this.setRoomCommandIds(idString);
 		this.setRoomCommands(null);
 	}
 	private void inflateCommands()
-	{
-		String[] idStrings = this.getRoomCommandIds().split(ROOM_COMMAND_ID_SEPARATOR);
-		RoomCommand[] commands = new RoomCommand[idStrings.length];
-		for (int i = 0; i < idStrings.length; i++)
+	{	
+		if(this.getRoomCommandIds() != null && !(this.getRoomCommandIds().equals("")))
 		{
-			commands[i] = RoomCommand.createRoomCommand(Integer.parseInt(idStrings[i]));
+			String idStringList = this.getRoomCommandIds();
+			String[] idStrings = idStringList.split(ROOM_COMMAND_ID_SEPARATOR);
+			RoomCommand[] commands = new RoomCommand[idStrings.length];
+			for (int i = 0; i < idStrings.length; i++)
+			{
+				commands[i] = RoomCommand.createRoomCommand(Integer.parseInt(idStrings[i]));
+			}
+			this.setRoomCommands(commands);	
 		}
-		this.setRoomCommands(commands);
-		this.setRoomCommandIds(null);
 	}
-	
+
 	public RoomCommand[] getRoomCommands() {
 		return commands;
 	}
@@ -142,9 +148,9 @@ public class Room
 	public void setRoomCommandIds(String roomCommandIds) {
 		this.roomCommandIds = roomCommandIds;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

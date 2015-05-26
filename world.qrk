@@ -5,7 +5,7 @@
         <inventory/>
         <location x="0" y="0" z="0"/>
     </player>
-    <room id="0">
+    <room id="0" name="A Dark Forest">
         <description>The deep darkness of the forest surrounds you.</description>
         <dirConstraints>
             <down>false</down>
@@ -16,13 +16,28 @@
             <west>true</west>
         </dirConstraints>
         <itemContainer>
-            <deflatedItems id="0" itemType="book" name="Pamphlet">
+            <deflatedItems id="0" itemTypeId="0" name="Pamphlet">
                 <itemAttributes>booktext:Welcome to Qork. The Quinton-designed version of Zork!</itemAttributes>
             </deflatedItems>
         </itemContainer>
         <location x="0" y="0" z="0"/>
-        <name>A Dark Forest</name>
         <region name="forest"/>
         <startNarration>You stand alone in a forest</startNarration>
+    </room>
+    <room id="1" name="Mirror Room">
+        <description>There are no exits in the Room. A mirror hangs on the north wall.</description>
+        <dirConstraints>
+            <down>false</down>
+            <east>false</east>
+            <north>false</north>
+            <south>false</south>
+            <up>false</up>
+            <west>false</west>
+        </dirConstraints>
+        <itemContainer/>
+        <location x="0" y="0" z="-1"/>
+        <region name="underground"/>
+        <roomCommandIds>1</roomCommandIds>
+        <startNarration>You find yourself in a mirror room.</startNarration>
     </room>
 </world>

@@ -14,4 +14,8 @@ public abstract class RoomCommand
 			return new MirrorRoomCommand();
 		return null;
 	}
+	public String toString()
+	{
+		return "RoomCommand: " + this.getRoomCommandId();
+	}
 }

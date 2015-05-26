@@ -57,7 +57,7 @@ public class TestRoomGenerator
 		mirrorRoom.setId(RoomId.ROOM_MIRRORROOM);
 		mirrorRoom.setDirConstraints(new DirectionConstraints(false,false,false,false,false,false));
 		mirrorRoom.setRegion(new Region("underground"));
-		mirrorRoom.setRoomCommands(new RoomCommand[]{new MirrorRoomCommand()});
+		mirrorRoom.setRoomCommands(new RoomCommand[] {new MirrorRoomCommand()});
 		return mirrorRoom;
 		
 	}

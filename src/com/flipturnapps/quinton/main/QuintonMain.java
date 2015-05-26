@@ -8,7 +8,7 @@ import com.flipturnapps.quinton.xmldata.World;
 public class QuintonMain 
 {
 
-	private static final boolean SHOULD_READ_WORLD_FROM_FILE = true;
+	private static final boolean SHOULD_READ_WORLD_FROM_FILE = false;
 	public static void main(String[] args) 
 	{
 		new QuintonMain().go();
@@ -24,10 +24,11 @@ public class QuintonMain
 			world = gen.generateAndSaveTestWorld(this.getWorldsaveFile());
 		else
 			world = gen.readWorld(this.getWorldsaveFile());
+		
 	}
 	public File getWorldsaveFile()
 	{
-		return new File("world.xml");
+		return new File("world.qrk");
 	}
 	
 
