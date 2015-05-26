@@ -61,7 +61,6 @@ public class QuintonMain
 			String input = scanner.nextLine();
 			try
 			{
-				System.out.println(input);
 				parser.runCommand(input, null, world);
 			} 
 			catch (CommandParseException e) 
