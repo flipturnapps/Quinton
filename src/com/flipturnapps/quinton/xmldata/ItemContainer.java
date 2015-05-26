@@ -41,7 +41,6 @@ public class ItemContainer
 			{
 				Item item = this.getInflatedItems().get(i);
 				this.getDeflatedItems().add(item.deflate());
-				System.out.println("dd");
 			}
 			this.getInflatedItems().clear();
 		}
