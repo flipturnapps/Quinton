@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import com.flipturnapps.quinton.xmldata.Location;
 import com.flipturnapps.quinton.xmldata.Room;
 import com.flipturnapps.quinton.xmldata.World;
 
@@ -60,8 +61,11 @@ public class WorldGenerator
 		TestRoomGenerator gen = new TestRoomGenerator();
 		World world = new World();
 		Room startRoom = gen.generateStartRoom(world);
-		Room[] rooms = new Room[1];
+		Room[] rooms = new Room[4];
 		rooms[0] = startRoom;
+		rooms[1] = gen.generateForestRoom(world, new Location(1,0,0));
+		rooms[2] = gen.generateMirrorRoom(world);
+		rooms[3] = gen.generateForestRoom(world, new Location(0,0,1));
 		world.setRoom(rooms);
 		System.out.println("kek");
 		return world;

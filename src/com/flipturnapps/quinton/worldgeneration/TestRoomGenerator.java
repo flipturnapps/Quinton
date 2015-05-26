@@ -32,6 +32,21 @@ public class TestRoomGenerator
 		
 	}
 	
+	
+	public Room generateForestRoom(World world, Location loc)
+	{
+		Room startRoom = new Room();
+		startRoom.setName("A Dark Forest");
+		startRoom.setDescription("The deep darkness of the forest surrounds you.");
+		startRoom.setStartNarration("You stand alone in a forest");
+		startRoom.setLocation(loc);
+		startRoom.setId(RoomId.ROOM_SURROUNDFOREST);
+		startRoom.setDirConstraints(new DirectionConstraints());
+		startRoom.setRegion(new Region("forest"));
+		return startRoom;
+		
+	}
+	
 	public Room generateMirrorRoom(World world)
 	{
 		Room mirrorRoom = new Room();
