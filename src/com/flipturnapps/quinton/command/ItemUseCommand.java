@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import com.flipturnapps.kevinLibrary.command.Command;
 import com.flipturnapps.kevinLibrary.command.SimpleCommand;
+import com.flipturnapps.kevinLibrary.helper.ArrayHelper;
 import com.flipturnapps.quinton.item.Item;
 
 public class ItemUseCommand extends SimpleCommand 
 {
 
-	private static ArrayList<Item> itemlist;
+	private static ArrayList<Item> itemList;
 
 	@Override
 	public String getName()
@@ -60,8 +61,10 @@ public class ItemUseCommand extends SimpleCommand
 	}
 
 	@Override
-	public Object execute(String commandName, String[] params, Object data) 
+	public Object execute(String verb, String[] nouns, Object data) 
 	{
+		Item useItem = this.itemList.get(this.getItemIndexUsed(verb, nouns));
+		useItem.useAsSubtype();
 		return null;
 	}
 
@@ -84,15 +87,37 @@ public class ItemUseCommand extends SimpleCommand
 	}
 	public boolean namesMatch(String verb, String[] nouns)
 	{
-		//TODO finish names match method
+		if(this.getItemIndexUsed(verb, nouns) > -1)
+			return true;
 		return false;
+	}
+	private int getItemIndexUsed(String verb, String[] nouns)
+	{
+		int itemIndex = -1;
+		String nounString = "";
+		for (int i = 0; i < nouns.length; i++)
+		{
+			nounString += nouns[i];
+			if(i != (nouns.length - 1))
+				nounString += " ";
+		}
+		for(int i = 0; i < itemList.size(); i++)
+		{
+			String[] nounList = itemList.get(i).getNounSynonyms();
+			boolean nounsMatch = ArrayHelper.contains(nounString, nounList);
+			String[] verbList = itemList.get(i).getVerbSynonyms();
+			boolean verbsMatch = ArrayHelper.contains(verb, verbList) || verb.equalsIgnoreCase("use");
+			if(nounsMatch && verbsMatch)
+				itemIndex = i;
+		}
+		return itemIndex;
 	}
 
 	public static void registerItem(Item item)
 	{
-		if(itemlist == null)
-			itemlist = new ArrayList<Item>();
-		itemlist.add(item);
+		if(itemList == null)
+			itemList = new ArrayList<Item>();
+		itemList.add(item);
 		
 	}
 
