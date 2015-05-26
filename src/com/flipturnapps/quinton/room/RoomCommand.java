@@ -6,7 +6,8 @@ import com.flipturnapps.quinton.xmldata.World;
 public abstract class RoomCommand 
 {
 	public abstract int getRoomCommandId();
-	public abstract void performCommand (String command, World world);
+	public abstract boolean performCommand (String command, World world);
+	
 	
 	public static RoomCommand createRoomCommand(int id)
 	{

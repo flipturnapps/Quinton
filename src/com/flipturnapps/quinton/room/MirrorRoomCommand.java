@@ -11,10 +11,15 @@ public class MirrorRoomCommand extends RoomCommand {
 	}
 
 	@Override
-	public void performCommand(String command, World world) 
+	public boolean performCommand(String command, World world) 
 	{
 		if(command.equalsIgnoreCase("touch mirror"))
-			world.getPlayer().getLocation().changeX(-1);
+		{
+			world.getPlayer().getLocation().changeZ(+1);
+			return true;
+		}
+		return false;
+		
 
 	}
 
