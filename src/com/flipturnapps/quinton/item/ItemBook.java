@@ -37,8 +37,8 @@ public class ItemBook extends Item
 	@Override
 	public boolean useAsSubtype() 
 	{
-		this.getWorld().outputLine("You read the " + this.getName() + ".  It reads: ");
-		this.getWorld().outputLine(booktext);
+		this.getWorld().println("You read the " + this.getName() + ".  It reads: ");
+		this.getWorld().println(" \"" + booktext + "\"");
 		return false;
 	}
 

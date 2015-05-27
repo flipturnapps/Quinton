@@ -15,7 +15,7 @@ public class ItemUseCommand extends SimpleCommand
 	@Override
 	public String getName()
 	{
-		return "useitem";
+		return "use";
 	}
 
 	@Override
@@ -106,7 +106,6 @@ public class ItemUseCommand extends SimpleCommand
 		}
 		for(int i = 0; i < itemList.size(); i++)
 		{
-			System.out.println("ItemIndex ");
 			String[] nounList = itemList.get(i).getNounSynonyms();
 			
 			boolean nounsMatch = ((nounList != null) && ArrayHelper.contains(nounString, nounList)) || nounString.equalsIgnoreCase(itemList.get(i).getName());

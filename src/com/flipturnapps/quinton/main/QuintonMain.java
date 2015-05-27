@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import com.flipturnapps.kevinLibrary.command.BasicCommandParser;
 import com.flipturnapps.kevinLibrary.command.Command;
 import com.flipturnapps.kevinLibrary.command.CommandParseException;
@@ -17,7 +15,9 @@ import com.flipturnapps.quinton.command.CommandMoveNorth;
 import com.flipturnapps.quinton.command.CommandMoveSouth;
 import com.flipturnapps.quinton.command.CommandMoveUp;
 import com.flipturnapps.quinton.command.CommandMoveWest;
+import com.flipturnapps.quinton.command.GoCommand;
 import com.flipturnapps.quinton.command.ItemUseCommand;
+import com.flipturnapps.quinton.command.QorkHelpCommand;
 import com.flipturnapps.quinton.room.RoomCommand;
 import com.flipturnapps.quinton.worldgeneration.WorldGenerator;
 import com.flipturnapps.quinton.xmldata.Room;
@@ -31,6 +31,7 @@ public class QuintonMain
 	{
 		new QuintonMain().go();
 	}
+	private BasicCommandParser parser;
 	private void go() 
 	{
 		boolean generate = !this.SHOULD_READ_WORLD_FROM_FILE;
@@ -49,9 +50,11 @@ public class QuintonMain
 		commands.add(new CommandMoveSouth());
 		commands.add(new CommandMoveWest());
 		commands.add(new CommandMoveEast());
+		commands.add(new QorkHelpCommand(world));
+		commands.add(new GoCommand(this));
 		ItemUseCommand itemUseCommand = new ItemUseCommand();
 		commands.add(itemUseCommand);
-		BasicCommandParser parser = new BasicCommandParser(commands);
+		parser = new BasicCommandParser(commands);
 		Scanner scanner = new Scanner(System.in);
 		Room lastRoom = null;
 		Room room = null;
@@ -60,7 +63,7 @@ public class QuintonMain
 			room = world.getPlayersRoom();
 			if(room == null)
 			{
-				world.outputLine("You can't go that way.");				
+				world.println("You can't go that way.");				
 				room = lastRoom;
 				world.getPlayer().setLocation(lastRoom.getLocation().copy());
 			}
@@ -94,9 +97,9 @@ public class QuintonMain
 			{
 				if(room.getItemContainer().getInflatedItems().size() > 0)
 				{
-					System.out.println("You see beside you: ");
+					System.out.println("  You see beside you: ");
 					for(int i = 0; i < room.getItemContainer().getInflatedItems().size(); i++)
-						System.out.println(room.getItemContainer().getInflatedItems().get(i).getName());
+						System.out.println("   " + room.getItemContainer().getInflatedItems().get(i).getName());
 				}
 			}
 			catch(Exception ex)
@@ -105,40 +108,45 @@ public class QuintonMain
 
 
 			String input = scanner.nextLine();
-			try
-			{
-				parser.runCommand(input, null, world);
-			} 
-			catch (CommandParseException e) 
-			{
-				System.out.println("syntax!");
-			} 
-			catch (NonExistentCommandException e)
-			{
-				RoomCommand[] roomCommands = room.getRoomCommands();
-				boolean complete = false;
-				if(roomCommands != null)
-				{
-					for (int i = 0; i < roomCommands.length; i++) 
-					{
-						boolean output = roomCommands[i].performCommand(input, world);
-						if(output)
-						{
-							complete = true;
-							break;
-						}
-					}
-				}
-				if(!complete)
-					System.out.println("I dont know how to " + input);
-			} 
-			catch (IncorrectDataException e)
-			{
-				System.out.println(e.getErrorTypeText());
-				System.out.println("The program is broken.");
-			}
+			this.parseCommand(input, world, room);
 			lastRoom = room;
 		}
+	}
+	public void parseCommand(String input, World world, Room room) 
+	{
+		try
+		{
+			parser.runCommand(input, null, world);
+		} 
+		catch (CommandParseException e) 
+		{
+			System.out.println("syntax!");
+		} 
+		catch (NonExistentCommandException e)
+		{
+			RoomCommand[] roomCommands = room.getRoomCommands();
+			boolean complete = false;
+			if(roomCommands != null)
+			{
+				for (int i = 0; i < roomCommands.length; i++) 
+				{
+					boolean output = roomCommands[i].performCommand(input, world);
+					if(output)
+					{
+						complete = true;
+						break;
+					}
+				}
+			}
+			if(!complete)
+				System.out.println("I dont know how to " + input);
+		} 
+		catch (IncorrectDataException e)
+		{
+			System.out.println(e.getErrorTypeText());
+			System.out.println("The program is broken.");
+		}
+		
 	}
 	public File getWorldsaveFile()
 	{
