@@ -105,9 +105,8 @@ public class ItemUseCommand extends SimpleCommand
 		}
 		for(int i = 0; i < itemList.size(); i++)
 		{
-			String[] nounList = itemList.get(i).getNounSynonyms();
 			
-			boolean nounsMatch = ((nounList != null) && ArrayHelper.contains(nounString, nounList)) || nounString.equalsIgnoreCase(itemList.get(i).getName());
+			boolean nounsMatch = nounString.equalsIgnoreCase(itemList.get(i).getName());
 			
 			
 			boolean verbsMatch = itemList.get(i).isVerbAllowed(verb);

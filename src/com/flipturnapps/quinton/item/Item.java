@@ -21,7 +21,6 @@ public abstract class Item
 	public abstract HashMap<String,String> getSubtypeAttributes();
 	protected abstract void processSubtypeAttribute(String name, String value);
 	public abstract boolean canInventory();
-	public abstract String[] getNounSynonyms();
 	public abstract boolean isVerbAllowed(String verb);
 	public String getItemDisplayText()
 	{
@@ -113,6 +112,8 @@ public abstract class Item
 			inflatedItem = new ItemBook(world,itemgen);
 		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_MIRROR)
 			inflatedItem = new ItemMirror(world,itemgen);
+		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_ENVIRONMENT)
+			inflatedItem = new EnvironmentItem(world,itemgen);
 		inflatedItems.add(inflatedItem);
 		
 	}

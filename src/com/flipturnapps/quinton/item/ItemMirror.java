@@ -93,12 +93,6 @@ public class ItemMirror extends EnvironmentItem
 
 	}
 
-	@Override
-	public String[] getNounSynonyms() 
-	{
-		return null;
-	}	
-
 	public boolean isBroken() {
 		return broken;
 	}

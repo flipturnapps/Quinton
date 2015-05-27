@@ -2,6 +2,7 @@ package com.flipturnapps.quinton.worldgeneration;
 
 import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.id.RoomId;
+import com.flipturnapps.quinton.item.EnvironmentItem;
 import com.flipturnapps.quinton.item.ItemBook;
 import com.flipturnapps.quinton.item.ItemMirror;
 import com.flipturnapps.quinton.xmldata.DirectionConstraints;
@@ -18,15 +19,19 @@ public class TestRoomGenerator
 	{
 		Room startRoom = new Room();
 		startRoom.setName("A Dark Forest");
-		startRoom.setDescription("The deep darkness of the forest surrounds you.");
-		startRoom.setStartNarration("You stand alone in a forest");
+		startRoom.setDescription("Next to you there is a large boulder.");
+		startRoom.setStartNarration("You stand alone in a forest.");
 		startRoom.setLocation(new Location(0,0,0));
 		startRoom.setId(RoomId.ROOM_STARTFOREST);
-		startRoom.setDirConstraints(new DirectionConstraints(true,true,true,true,false,true));
+		startRoom.setDirConstraints(new DirectionConstraints(true,true,true,true,false,false));
 		startRoom.setRegion(new Region("forest"));
 		ItemBook startBook = new ItemBook(world,"Pamphlet",ItemId.ITEM_PAMPHLET);
-		startBook.setBooktext("Welcome to Qork. The Quinton-designed version of Zork!");
+		startBook.setBooktext("Welcome to Qork. The Quinton-designed version of Zork!    \n"
+				            + "  The command parser of Qork is quite particular.          \n"
+				            + "  Just know that verbs you send into Qork must be ONE WORD. \n"
+				            + "  readCapiche?");
 		startRoom.getItemContainer().addInflatedItem(startBook);
+		startRoom.getItemContainer().addInflatedItem(new EnvironmentItem(world,"Boulder",ItemId.ITEM_BOULDER));
 		return startRoom;
 
 	}
