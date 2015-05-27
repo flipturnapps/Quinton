@@ -50,10 +50,10 @@ public class ItemMirror extends EnvironmentItem
 	@Override
 	public void interactWith(String verb)
 	{
-		if(verb.equalsIgnoreCase("break"))
+		if(verb.equalsIgnoreCase("break") || verb.equalsIgnoreCase("kick"))
 		{
 			this.getWorld().println("The mirror shatters. Looks like you won't be trying your luck in the lottery anytime soon.");
-			
+			setBroken(true);
 		}
 		if(verb.equalsIgnoreCase("examine")||verb.equalsIgnoreCase("use"))
 		{
@@ -63,12 +63,12 @@ public class ItemMirror extends EnvironmentItem
 		{
 			this.getWorld().println("You feel yourself being teleported.");
 			this.getWorld().getPlayer().getLocation().changeZ(1);
-			setBroken(true);
+			
 		}
 	}
 	public boolean isVerbAllowed(String verb)
 	{
-		if(verb.equalsIgnoreCase("break"))
+		if(verb.equalsIgnoreCase("break") || verb.equalsIgnoreCase("kick"))
 			return true;
 		if(verb.equalsIgnoreCase("examine")||verb.equalsIgnoreCase("use"))
 			return true;
@@ -106,10 +106,10 @@ public class ItemMirror extends EnvironmentItem
 	public void setBroken(boolean broken) {
 		this.broken = broken;
 	}
-	public String getDisplayText()
+	public String getItemDisplayText()
 	{
 		if(broken)
-			return "A broken " + this.getName();
+			return "A shattered " + this.getName();
 		else
 			return "A glimmering " + this.getName();
 	}

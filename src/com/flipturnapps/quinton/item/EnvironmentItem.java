@@ -1,7 +1,5 @@
 package com.flipturnapps.quinton.item;
 
-import java.util.HashMap;
-
 import com.flipturnapps.quinton.xmldata.ItemGen;
 import com.flipturnapps.quinton.xmldata.World;
 
