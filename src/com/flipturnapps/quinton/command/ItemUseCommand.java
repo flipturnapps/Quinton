@@ -64,8 +64,7 @@ public class ItemUseCommand extends SimpleCommand
 	public Object execute(String verb, String[] nouns, Object data) 
 	{
 		Item useItem = this.itemList.get(this.getItemIndexUsed(verb, nouns));
-		boolean consumed = useItem.useAsSubtype();
-		
+		useItem.interactWith(verb);		
 		return null;
 	}
 
@@ -109,9 +108,9 @@ public class ItemUseCommand extends SimpleCommand
 			String[] nounList = itemList.get(i).getNounSynonyms();
 			
 			boolean nounsMatch = ((nounList != null) && ArrayHelper.contains(nounString, nounList)) || nounString.equalsIgnoreCase(itemList.get(i).getName());
-			String[] verbList = itemList.get(i).getVerbSynonyms();
 			
-			boolean verbsMatch = ((verbList != null) && ArrayHelper.contains(verb, verbList)) || verb.equalsIgnoreCase("use");
+			
+			boolean verbsMatch = itemList.get(i).isVerbAllowed(verb);
 			if(nounsMatch && verbsMatch)
 				itemIndex = i;
 			

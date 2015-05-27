@@ -35,11 +35,10 @@ public class ItemBook extends Item
 	}
 
 	@Override
-	public boolean useAsSubtype() 
+	public void interactWith(String verb) 
 	{
 		this.getWorld().println("You read the " + this.getName() + ".  It reads: ");
 		this.getWorld().println(" \"" + booktext + "\"");
-		return false;
 	}
 
 	@Override
@@ -69,13 +68,16 @@ public class ItemBook extends Item
 		return null;
 	}
 	@Override
-	public String[] getVerbSynonyms() 	
-	{
-		return new String[]{"read"};
-	}
-	@Override
 	public boolean canInventory() 
 	{
 		return true;
 	}
+	@Override
+	public boolean isVerbAllowed(String verb) 
+	{
+		if(verb.equalsIgnoreCase("read")||verb.equalsIgnoreCase("use"))
+			return true;
+		return false;
+	}
+	
 }

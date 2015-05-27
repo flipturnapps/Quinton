@@ -7,8 +7,6 @@ import com.flipturnapps.quinton.xmldata.World;
 
 public class TakeCommand extends UserCommand 
 {
-
-
 	@Override
 	public String getName() 
 	{
@@ -30,7 +28,7 @@ public class TakeCommand extends UserCommand
 	@Override
 	public int getMinimumParams() 
 	{
-		return 1;
+		return 0;
 	}
 
 	@Override
@@ -42,6 +40,8 @@ public class TakeCommand extends UserCommand
 	@Override
 	protected void userCommandExecute(String[] params, World world) 
 	{
+		if(params.length > 0)
+		{
 		Room room = world.getPlayersRoom();
 		boolean hasTaken = false;
 		for(int i = 0; i < room.getItemContainer().getInflatedItems().size();i++)
@@ -63,6 +63,16 @@ public class TakeCommand extends UserCommand
 		}
 		if(!hasTaken)
 			world.println("You couldn't find that item...");
+		}
+		if(world.getPlayersRoom().getItemContainer().getInflatedItems().size() == 1)
+		{
+			Item item = world.getPlayersRoom().getItemContainer().getInflatedItems().get(0);
+			this.takeItemFromRoom(item, world.getPlayersRoom(), world.getPlayer(), world);
+		}
+		else
+		{
+			world.println("What to take?");
+		}
 	}
 
 	private void takeItemFromRoom(Item item, Room room, Player player, World world)

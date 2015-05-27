@@ -46,7 +46,7 @@ public class InventoryCommand extends UserCommand {
 		world.println("Items: ");
 		for(int i = 0; i < items.size() ;i++)
 		{
-			world.println("-"+items.get(i).getName());
+			world.println("-"+items.get(i).getItemDisplayText());
 		}
 	}
 

@@ -40,7 +40,7 @@ public class QuintonMain
 	private World world;
 	private void go() 
 	{
-		boolean generate = !this.SHOULD_READ_WORLD_FROM_FILE;
+		boolean generate = !QuintonMain.SHOULD_READ_WORLD_FROM_FILE;
 		if(!generate && !this.getWorldsaveFile().exists())
 			generate = true;
 		WorldGenerator gen = new WorldGenerator();
@@ -67,8 +67,8 @@ public class QuintonMain
 		parser = new BasicCommandParser(commands);
 		Scanner scanner = new Scanner(System.in);
 		Room lastRoom = null;
-		Room room = null;
-		while(true)
+		Room room = null;			
+		while(world.getPlayer().getAlive())
 		{
 			room = world.getPlayersRoom();
 			if(room == null)
@@ -109,7 +109,7 @@ public class QuintonMain
 				{
 					System.out.println("  You see beside you: ");
 					for(int i = 0; i < room.getItemContainer().getInflatedItems().size(); i++)
-						System.out.println("   " + room.getItemContainer().getInflatedItems().get(i).getName());
+						System.out.println("   " + room.getItemContainer().getInflatedItems().get(i).getItemDisplayText());
 				}
 			}
 			catch(Exception ex)
@@ -121,8 +121,8 @@ public class QuintonMain
 			this.parseCommand(input, world, room);
 			lastRoom = room;
 		}
-		//world.deflate();
-		//gen.saveWorld(world, this.getWorldsaveFile());
+		scanner.close();
+		
 	}
 	public void parseCommand(String input, World world, Room room) 
 	{
@@ -156,7 +156,7 @@ public class QuintonMain
 		catch (IncorrectDataException e)
 		{
 			System.out.println(e.getErrorTypeText());
-			System.out.println("The program is broken.");
+			System.out.println("Syntax!");
 		}
 		
 	}

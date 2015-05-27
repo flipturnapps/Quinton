@@ -1,6 +1,5 @@
 package com.flipturnapps.quinton.room;
 
-import com.flipturnapps.quinton.id.RoomId;
 import com.flipturnapps.quinton.xmldata.World;
 
 public abstract class RoomCommand 
@@ -11,8 +10,8 @@ public abstract class RoomCommand
 	
 	public static RoomCommand createRoomCommand(int id)
 	{
-		if(id == RoomId.ROOMCOMMAND_MIRRORROOM)
-			return new MirrorRoomCommand();
+		//if(id == RoomId.ROOMCOMMAND_MIRRORROOM)
+		//	return new MirrorRoomCommand();
 		return null;
 	}
 	public String toString()

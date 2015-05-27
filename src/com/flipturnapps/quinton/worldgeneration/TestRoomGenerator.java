@@ -3,8 +3,7 @@ package com.flipturnapps.quinton.worldgeneration;
 import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.id.RoomId;
 import com.flipturnapps.quinton.item.ItemBook;
-import com.flipturnapps.quinton.room.MirrorRoomCommand;
-import com.flipturnapps.quinton.room.RoomCommand;
+import com.flipturnapps.quinton.item.ItemMirror;
 import com.flipturnapps.quinton.xmldata.DirectionConstraints;
 import com.flipturnapps.quinton.xmldata.Location;
 import com.flipturnapps.quinton.xmldata.Region;
@@ -13,8 +12,8 @@ import com.flipturnapps.quinton.xmldata.World;
 
 public class TestRoomGenerator
 {
-	
-	
+
+
 	public Room generateStartRoom(World world)
 	{
 		Room startRoom = new Room();
@@ -29,10 +28,10 @@ public class TestRoomGenerator
 		startBook.setBooktext("Welcome to Qork. The Quinton-designed version of Zork!");
 		startRoom.getItemContainer().addInflatedItem(startBook);
 		return startRoom;
-		
+
 	}
-	
-	
+
+
 	public Room generateForestRoom(World world, Location loc)
 	{
 		Room startRoom = new Room();
@@ -44,9 +43,9 @@ public class TestRoomGenerator
 		startRoom.setDirConstraints(new DirectionConstraints());
 		startRoom.setRegion(new Region("forest"));
 		return startRoom;
-		
+
 	}
-	
+
 	public Room generateMirrorRoom(World world)
 	{
 		Room mirrorRoom = new Room();
@@ -57,10 +56,11 @@ public class TestRoomGenerator
 		mirrorRoom.setId(RoomId.ROOM_MIRRORROOM);
 		mirrorRoom.setDirConstraints(new DirectionConstraints(false,false,false,false,false,false));
 		mirrorRoom.setRegion(new Region("underground"));
-		mirrorRoom.setRoomCommands(new RoomCommand[] {new MirrorRoomCommand()});
+		ItemMirror mirror = new ItemMirror(world);
+		mirrorRoom.getItemContainer().addInflatedItem(mirror);
 		return mirrorRoom;
-		
+
 	}
-	
+
 }
 

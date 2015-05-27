@@ -12,6 +12,7 @@ public class Player
 	private String name;
 	private ItemContainer inventory;
 	private int id;
+	private boolean alive;
 	public Player()
 	{
 		location = new Location();
@@ -19,6 +20,7 @@ public class Player
 		healthPercentage = 1;
 		id = 1;
 		this.setInventory(new ItemContainer());
+		alive = true;
 	}
 	public double getHealthPercentage() {
 		return healthPercentage;
@@ -69,6 +71,13 @@ public class Player
 	{
 		this.getInventory().deflate();
 		
+	}
+	public boolean getAlive() {
+		return alive;
+	}
+	@XmlElement
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 }
