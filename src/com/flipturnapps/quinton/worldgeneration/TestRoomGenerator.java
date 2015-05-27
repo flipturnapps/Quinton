@@ -23,7 +23,6 @@ public class TestRoomGenerator
 		startRoom.setStartNarration("You stand alone in a forest.");
 		startRoom.setLocation(new Location(0,0,0));
 		startRoom.setId(RoomId.ROOM_STARTFOREST);
-		startRoom.setDirConstraints(new DirectionConstraints(true,true,true,true,false,false));
 		startRoom.setRegion(new Region("forest"));
 		ItemBook startBook = new ItemBook(world,"Pamphlet",ItemId.ITEM_PAMPHLET);
 		startBook.setBooktext("Welcome to Qork. The Quinton-designed version of Zork!    \n"
@@ -45,7 +44,6 @@ public class TestRoomGenerator
 		startRoom.setStartNarration("You stand alone in a forest");
 		startRoom.setLocation(loc);
 		startRoom.setId(RoomId.ROOM_SURROUNDFOREST);
-		startRoom.setDirConstraints(new DirectionConstraints());
 		startRoom.setRegion(new Region("forest"));
 		return startRoom;
 

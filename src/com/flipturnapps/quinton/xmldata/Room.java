@@ -200,4 +200,8 @@ public class Room
 	public void setExploredByIdsList(ArrayList<Integer> exploredByIdsList) {
 		this.exploredByIdsList = exploredByIdsList;
 	}
+	public void inferDirectionConstraints(boolean forceOverNonNull)
+	{
+		//code to write here.
+	}
 }

@@ -49,9 +49,13 @@ public class World implements CommandOutput
 	}
 	public Room getPlayersRoom() 
 	{
+		return this.getRoomByLocation(this.getPlayer().getLocation());
+	}
+	public Room getRoomByLocation(Location l)
+	{
 		for(int i = 0; i < this.getRoom().length; i++)
 		{
-			if(this.getRoom()[i].getLocation().equals(this.getPlayer().getLocation()))
+			if(this.getRoom()[i].getLocation().equals(l))
 				return this.getRoom()[i];
 		}
 		return null;
