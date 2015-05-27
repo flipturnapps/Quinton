@@ -60,5 +60,15 @@ public class Player
 	public void setId(int id) {
 		this.id = id;
 	}
+	public void inflate(World world)
+	{
+		this.getInventory().inflate(world);
+		
+	}
+	public void deflate()
+	{
+		this.getInventory().deflate();
+		
+	}
 
 }

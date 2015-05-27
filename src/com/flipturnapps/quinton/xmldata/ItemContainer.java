@@ -27,14 +27,15 @@ public class ItemContainer
 	public ArrayList<Item> getInflatedItems() {
 		return inflatedItems;
 	}
-	@XmlElement
+	
+	
 	public void setInflatedItems(ArrayList<Item> inflatedItems) {
 		this.inflatedItems = inflatedItems;
 	}
 
 	public void deflate() 
 	{
-		if(this.getInflatedItems() != null && this.getInflatedItems().size() != 0)
+		if((this.getInflatedItems() != null) && (this.getInflatedItems().size() > 0))
 		{
 			this.getDeflatedItems().clear();
 			for(int i = 0; i < this.getInflatedItems().size(); i++)
@@ -42,8 +43,8 @@ public class ItemContainer
 				Item item = this.getInflatedItems().get(i);
 				this.getDeflatedItems().add(item.deflate());
 			}
-			this.getInflatedItems().clear();
 		}
+		this.setInflatedItems(null);
 	}
 	public void inflate(World world)
 	{
@@ -52,6 +53,8 @@ public class ItemContainer
 			for(int i = 0; i < this.getDeflatedItems().size(); i++)
 			{
 				ItemGen itemgen = this.getDeflatedItems().get(i);
+				if(this.getInflatedItems() == null)
+					this.setInflatedItems(new ArrayList<Item>());
 				Item.inflateAndAddItem(world,itemgen,this.getInflatedItems());			
 			}
 			this.getDeflatedItems().clear();

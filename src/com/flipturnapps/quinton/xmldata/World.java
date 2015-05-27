@@ -37,6 +37,7 @@ public class World implements CommandOutput
 		{
 			rooms[i].inflate(this);
 		}
+		player.inflate(this);
 	}
 	public void deflate()
 	{
@@ -44,6 +45,7 @@ public class World implements CommandOutput
 		{
 			rooms[i].deflate(this);
 		}
+		player.deflate();
 	}
 	public Room getPlayersRoom() 
 	{
