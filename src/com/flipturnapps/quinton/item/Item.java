@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import com.flipturnapps.quinton.command.ItemUseCommand;
 import com.flipturnapps.quinton.id.ItemId;
 import com.flipturnapps.quinton.xmldata.ItemGen;
 import com.flipturnapps.quinton.xmldata.World;
@@ -18,15 +17,16 @@ public abstract class Item
 	private int id;
 	private World world;
 	public abstract int getSubtypeId();
-	/**
-	@return whether or not the item was consumed in its usage
-	*/
-	public abstract boolean useAsSubtype();
+	public abstract void interactWith(String verb);
 	public abstract HashMap<String,String> getSubtypeAttributes();
 	protected abstract void processSubtypeAttribute(String name, String value);
 	public abstract boolean canInventory();
 	public abstract String[] getNounSynonyms();
-	public abstract String[] getVerbSynonyms();
+	public abstract boolean isVerbAllowed(String verb);
+	public String getItemDisplayText()
+	{
+		return this.getName();
+	}
 	public Item(World world, ItemGen item)
 	{
 		this.setWorld(world);
@@ -111,6 +111,8 @@ public abstract class Item
 		Item inflatedItem = null;
 		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_BOOK)
 			inflatedItem = new ItemBook(world,itemgen);
+		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_MIRROR)
+			inflatedItem = new ItemMirror(world,itemgen);
 		inflatedItems.add(inflatedItem);
 		
 	}
