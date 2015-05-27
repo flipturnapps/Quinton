@@ -56,7 +56,7 @@ public class WorldGenerator
 		}
 		w.inflate();
 	}
-	private World generateTestWorld()
+	public World generateTestWorld()
 	{
 		TestRoomGenerator gen = new TestRoomGenerator();
 		World world = new World();

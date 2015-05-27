@@ -26,7 +26,7 @@ import com.flipturnapps.quinton.xmldata.World;
 public class QuintonMain 
 {
 
-	private static final boolean SHOULD_READ_WORLD_FROM_FILE = false;
+	private static final boolean SHOULD_READ_WORLD_FROM_FILE = true;
 	public static void main(String[] args) 
 	{
 		new QuintonMain().go();
@@ -40,7 +40,7 @@ public class QuintonMain
 		World world;
 		WorldGenerator gen = new WorldGenerator();
 		if(generate)
-			world = gen.generateAndSaveTestWorld(this.getWorldsaveFile());
+			world = gen.generateTestWorld();
 		else
 			world = gen.readWorld(this.getWorldsaveFile());
 		ArrayList<Command> commands = new ArrayList<Command>();
@@ -111,6 +111,8 @@ public class QuintonMain
 			this.parseCommand(input, world, room);
 			lastRoom = room;
 		}
+		//world.deflate();
+		//gen.saveWorld(world, this.getWorldsaveFile());
 	}
 	public void parseCommand(String input, World world, Room room) 
 	{
