@@ -29,7 +29,7 @@ public class TestRoomGenerator
 		startBook.setBooktext("Welcome to Qork. The Quinton-designed version of Zork!    \n"
 				            + "  The command parser of Qork is quite particular.          \n"
 				            + "  Just know that verbs you send into Qork must be ONE WORD. \n"
-				            + "  readCapiche?");
+				            + "  Capiche?");
 		startRoom.getItemContainer().addInflatedItem(startBook);
 		startRoom.getItemContainer().addInflatedItem(new EnvironmentItem(world,"Boulder",ItemId.ITEM_BOULDER));
 		return startRoom;

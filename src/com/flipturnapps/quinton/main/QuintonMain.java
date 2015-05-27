@@ -20,6 +20,7 @@ import com.flipturnapps.quinton.command.GoCommand;
 import com.flipturnapps.quinton.command.InventoryCommand;
 import com.flipturnapps.quinton.command.ItemUseCommand;
 import com.flipturnapps.quinton.command.LoadCommand;
+import com.flipturnapps.quinton.command.LookCommand;
 import com.flipturnapps.quinton.command.QorkHelpCommand;
 import com.flipturnapps.quinton.command.SaveCommand;
 import com.flipturnapps.quinton.command.TakeCommand;
@@ -62,6 +63,7 @@ public class QuintonMain
 		commands.add(new TakeCommand());
 		commands.add(new InventoryCommand());
 		commands.add(new DropCommand());
+		commands.add(new LookCommand());
 		ItemUseCommand itemUseCommand = new ItemUseCommand();
 		commands.add(itemUseCommand);
 		parser = new BasicCommandParser(commands);
