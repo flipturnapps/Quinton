@@ -24,6 +24,7 @@ public abstract class Item
 	public abstract boolean useAsSubtype();
 	public abstract HashMap<String,String> getSubtypeAttributes();
 	protected abstract void processSubtypeAttribute(String name, String value);
+	public abstract boolean canInventory();
 	public abstract String[] getNounSynonyms();
 	public abstract String[] getVerbSynonyms();
 	public Item(World world, ItemGen item)

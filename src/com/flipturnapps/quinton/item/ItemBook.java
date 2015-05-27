@@ -73,4 +73,9 @@ public class ItemBook extends Item
 	{
 		return new String[]{"read"};
 	}
+	@Override
+	public boolean canInventory() 
+	{
+		return true;
+	}
 }
