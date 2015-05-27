@@ -73,7 +73,9 @@ public class QuintonMain
 			catch (Exception ex){}
 			try{
 				for(int i = 0; i < room.getItemContainer().getInflatedItems().size(); i++)
+				{
 					itemUseCommand.registerItem(room.getItemContainer().getInflatedItems().get(i));
+				}
 			}
 			catch (Exception ex){}
 			System.out.println();
@@ -86,8 +88,8 @@ public class QuintonMain
 				System.out.println(room.getStartNarration());
 				System.out.println(room.getDescription());
 			}
-			System.out.println("-DEBUG-Playerlocation: " + world.getPlayer().getLocation() + "");
-			System.out.println("-DEBUG-Roomlocation: " + room.getLocation() + "");
+			//System.out.println("-DEBUG-Playerlocation: " + world.getPlayer().getLocation() + "");
+			//System.out.println("-DEBUG-Roomlocation: " + room.getLocation() + "");
 			try
 			{
 				if(room.getItemContainer().getInflatedItems().size() > 0)
