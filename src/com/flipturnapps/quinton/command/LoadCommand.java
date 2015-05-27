@@ -3,22 +3,27 @@ package com.flipturnapps.quinton.command;
 import java.io.File;
 
 import com.flipturnapps.kevinLibrary.helper.FileHelper;
+import com.flipturnapps.quinton.main.QuintonMain;
 import com.flipturnapps.quinton.worldgeneration.WorldGenerator;
 import com.flipturnapps.quinton.xmldata.World;
 
-public class SaveCommand extends UserCommand 
+public class LoadCommand extends UserCommand 
 {
-
+	private QuintonMain qMain;
+	public LoadCommand (QuintonMain q)
+	{
+		this.qMain =q;
+	}
 	@Override
 	public String getName()
 	{
-return "save";
+return "load";
 	}
 
 	@Override
 	public String getHelpText()
 	{
-		return "Usage: save <file>";
+		return "Usage: load <file>";
 	}
 
 	@Override
@@ -48,7 +53,8 @@ return "save";
 			filename = "world.qrk";
 		else
 			filename = params[0];
-		gen.saveWorld(world, new File (FileHelper.getAppDataDir("flipturnapps", "qork")+filename));
+		World w = gen.readWorld(new File (FileHelper.getAppDataDir("flipturnapps", "qork")+filename));
+		qMain.setWorld(w);
 	}
 
 }

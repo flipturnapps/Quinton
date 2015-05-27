@@ -17,7 +17,9 @@ import com.flipturnapps.quinton.command.CommandMoveUp;
 import com.flipturnapps.quinton.command.CommandMoveWest;
 import com.flipturnapps.quinton.command.GoCommand;
 import com.flipturnapps.quinton.command.ItemUseCommand;
+import com.flipturnapps.quinton.command.LoadCommand;
 import com.flipturnapps.quinton.command.QorkHelpCommand;
+import com.flipturnapps.quinton.command.SaveCommand;
 import com.flipturnapps.quinton.room.RoomCommand;
 import com.flipturnapps.quinton.worldgeneration.WorldGenerator;
 import com.flipturnapps.quinton.xmldata.Room;
@@ -26,18 +28,18 @@ import com.flipturnapps.quinton.xmldata.World;
 public class QuintonMain 
 {
 
-	private static final boolean SHOULD_READ_WORLD_FROM_FILE = true;
+	private static final boolean SHOULD_READ_WORLD_FROM_FILE = false;
 	public static void main(String[] args) 
 	{
 		new QuintonMain().go();
 	}
 	private BasicCommandParser parser;
+	private World world;
 	private void go() 
 	{
 		boolean generate = !this.SHOULD_READ_WORLD_FROM_FILE;
 		if(!generate && !this.getWorldsaveFile().exists())
 			generate = true;
-		World world;
 		WorldGenerator gen = new WorldGenerator();
 		if(generate)
 			world = gen.generateTestWorld();
@@ -52,6 +54,8 @@ public class QuintonMain
 		commands.add(new CommandMoveEast());
 		commands.add(new QorkHelpCommand(world));
 		commands.add(new GoCommand(this));
+		commands.add(new SaveCommand());
+		commands.add(new LoadCommand(this));
 		ItemUseCommand itemUseCommand = new ItemUseCommand();
 		commands.add(itemUseCommand);
 		parser = new BasicCommandParser(commands);
@@ -153,6 +157,11 @@ public class QuintonMain
 	public File getWorldsaveFile()
 	{
 		return new File("world.qrk");
+	}
+	public void setWorld(World w) 
+	{
+		this.world = w;
+		
 	}
 
 

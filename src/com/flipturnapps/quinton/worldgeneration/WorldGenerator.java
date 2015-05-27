@@ -70,6 +70,7 @@ public class WorldGenerator
 		world.inflate();
 		return world;
 	}
+	
 
 }
 
