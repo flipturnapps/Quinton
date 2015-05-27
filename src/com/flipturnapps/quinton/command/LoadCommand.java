@@ -53,8 +53,15 @@ return "load";
 			filename = "world.qrk";
 		else
 			filename = params[0];
+		try
+		{
 		World w = gen.readWorld(new File (FileHelper.getAppDataDir("flipturnapps", "qork")+filename));
 		qMain.setWorld(w);
+		}
+		catch(Exception ex)
+		{
+			world.println("fail");
+		}
 	}
 
 }

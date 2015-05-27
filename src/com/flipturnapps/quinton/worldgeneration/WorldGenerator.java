@@ -48,7 +48,7 @@ public class WorldGenerator
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(w, f);
-			jaxbMarshaller.marshal(w, System.out);
+			//jaxbMarshaller.marshal(w, System.out);
 		}
 		catch(Exception ex)
 		{

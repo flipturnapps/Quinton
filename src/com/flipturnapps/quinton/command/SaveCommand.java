@@ -48,6 +48,7 @@ return "save";
 			filename = "world.qrk";
 		else
 			filename = params[0];
+		new File(FileHelper.getAppDataDir("flipturnapps", "qork")).mkdirs();
 		gen.saveWorld(world, new File (FileHelper.getAppDataDir("flipturnapps", "qork")+filename));
 	}
 
