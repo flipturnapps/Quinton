@@ -43,10 +43,15 @@ public class DropCommand extends UserCommand
 	protected void userCommandExecute(String[] params, World world) 
 	{
 		Room room = world.getPlayersRoom();
+		
+		boolean hasDropped = false;
 		for(int i = 0; i < world.getPlayer().getInventory().getInflatedItems().size();i++)
 		{
 			if(world.getPlayer().getInventory().getInflatedItems().get(i).getName().equalsIgnoreCase(params[0]))
+			{
 				dropItemInRoom(world.getPlayer().getInventory().getInflatedItems().get(i),room,world.getPlayer(),world);
+				hasDropped = true;
+			}
 			
 		}
 		if(params[0].equalsIgnoreCase("all"))
@@ -54,10 +59,13 @@ public class DropCommand extends UserCommand
 			int iterations =world.getPlayer().getInventory().getInflatedItems().size();
 			for(int i = 0; i < iterations;i++)
 			{
-					dropItemInRoom(world.getPlayer().getInventory().getInflatedItems().get(0),room,world.getPlayer(),world);
+				dropItemInRoom(world.getPlayer().getInventory().getInflatedItems().get(0),room,world.getPlayer(),world);
 				
 			}
+			hasDropped = true;
 		}
+		if(!hasDropped)
+			world.println("You don't have that item on you...");
 	}
 
 	private void dropItemInRoom(Item item, Room room, Player player, World world)

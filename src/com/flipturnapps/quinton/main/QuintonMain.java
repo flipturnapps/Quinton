@@ -15,6 +15,7 @@ import com.flipturnapps.quinton.command.CommandMoveNorth;
 import com.flipturnapps.quinton.command.CommandMoveSouth;
 import com.flipturnapps.quinton.command.CommandMoveUp;
 import com.flipturnapps.quinton.command.CommandMoveWest;
+import com.flipturnapps.quinton.command.DropCommand;
 import com.flipturnapps.quinton.command.GoCommand;
 import com.flipturnapps.quinton.command.InventoryCommand;
 import com.flipturnapps.quinton.command.ItemUseCommand;
@@ -60,6 +61,7 @@ public class QuintonMain
 		commands.add(new LoadCommand(this));
 		commands.add(new TakeCommand());
 		commands.add(new InventoryCommand());
+		commands.add(new DropCommand());
 		ItemUseCommand itemUseCommand = new ItemUseCommand();
 		commands.add(itemUseCommand);
 		parser = new BasicCommandParser(commands);

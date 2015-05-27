@@ -43,11 +43,14 @@ public class TakeCommand extends UserCommand
 	protected void userCommandExecute(String[] params, World world) 
 	{
 		Room room = world.getPlayersRoom();
+		boolean hasTaken = false;
 		for(int i = 0; i < room.getItemContainer().getInflatedItems().size();i++)
 		{
 			if(room.getItemContainer().getInflatedItems().get(i).getName().equalsIgnoreCase(params[0]))
+			{
 				takeItemFromRoom(room.getItemContainer().getInflatedItems().get(i),room,world.getPlayer(),world);
-			
+			hasTaken=true;
+			}			
 		}
 		if(params[0].equalsIgnoreCase("all"))
 		{
@@ -55,9 +58,11 @@ public class TakeCommand extends UserCommand
 			for(int i = 0; i < iterations;i++)
 			{
 					takeItemFromRoom(room.getItemContainer().getInflatedItems().get(0),room,world.getPlayer(),world);
-				
+				hasTaken = true;
 			}
 		}
+		if(!hasTaken)
+			world.println("You couldn't find that item...");
 	}
 
 	private void takeItemFromRoom(Item item, Room room, Player player, World world)
