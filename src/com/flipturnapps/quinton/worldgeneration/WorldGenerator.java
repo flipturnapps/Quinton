@@ -48,7 +48,6 @@ public class WorldGenerator
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(w, f);
-			jaxbMarshaller.marshal(w, System.out);
 		}
 		catch(Exception ex)
 		{
@@ -56,7 +55,7 @@ public class WorldGenerator
 		}
 		w.inflate();
 	}
-	private World generateTestWorld()
+	public World generateTestWorld()
 	{
 		TestRoomGenerator gen = new TestRoomGenerator();
 		World world = new World();
@@ -70,6 +69,7 @@ public class WorldGenerator
 		world.inflate();
 		return world;
 	}
+	
 
 }
 

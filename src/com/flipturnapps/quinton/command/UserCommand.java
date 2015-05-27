@@ -8,17 +8,7 @@ import com.flipturnapps.quinton.xmldata.World;
 
 public abstract class UserCommand extends SimpleCommand 
 {
-	@Override
-	public int getMaximumParams() 
-	{
-		return 1;
-	}
 
-	@Override
-	public int getMinimumParams()
-	{
-		return 0;
-	}
 
 	@Override
 	public boolean willInterceptCommand(Command command, String[] params)

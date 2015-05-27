@@ -10,12 +10,12 @@ import com.flipturnapps.quinton.item.Item;
 public class ItemUseCommand extends SimpleCommand 
 {
 
-	private static ArrayList<Item> itemList;
+	private  ArrayList<Item> itemList;
 
 	@Override
 	public String getName()
 	{
-		return "useitem";
+		return "use";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class ItemUseCommand extends SimpleCommand
 	@Override
 	public int getMinimumParams() 
 	{
-		return 2;
+		return 0;
 	}
 
 	@Override
@@ -64,7 +64,8 @@ public class ItemUseCommand extends SimpleCommand
 	public Object execute(String verb, String[] nouns, Object data) 
 	{
 		Item useItem = this.itemList.get(this.getItemIndexUsed(verb, nouns));
-		useItem.useAsSubtype();
+		boolean consumed = useItem.useAsSubtype();
+		
 		return null;
 	}
 
@@ -106,20 +107,25 @@ public class ItemUseCommand extends SimpleCommand
 		for(int i = 0; i < itemList.size(); i++)
 		{
 			String[] nounList = itemList.get(i).getNounSynonyms();
-			if(nounList == null)
-				continue;
-			boolean nounsMatch = ArrayHelper.contains(nounString, nounList);
+			
+			boolean nounsMatch = ((nounList != null) && ArrayHelper.contains(nounString, nounList)) || nounString.equalsIgnoreCase(itemList.get(i).getName());
 			String[] verbList = itemList.get(i).getVerbSynonyms();
-			if(verbList == null)
-				continue;
-			boolean verbsMatch = ArrayHelper.contains(verb, verbList) || verb.equalsIgnoreCase("use");
+			
+			boolean verbsMatch = ((verbList != null) && ArrayHelper.contains(verb, verbList)) || verb.equalsIgnoreCase("use");
 			if(nounsMatch && verbsMatch)
 				itemIndex = i;
+			
 		}
 		return itemIndex;
 	}
 
-	public static void registerItem(Item item)
+	public void clearItemList()
+	{
+		if(itemList == null)
+			itemList = new ArrayList<Item>();
+		itemList.clear();
+	}
+	public void registerItem(Item item)
 	{
 		if(itemList == null)
 			itemList = new ArrayList<Item>();

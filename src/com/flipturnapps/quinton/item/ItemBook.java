@@ -35,10 +35,11 @@ public class ItemBook extends Item
 	}
 
 	@Override
-	public void useAsSubtype() 
+	public boolean useAsSubtype() 
 	{
-		this.getWorld().outputLine("You read the " + this.getName() + ".  It reads: ");
-		this.getWorld().outputLine(booktext);
+		this.getWorld().println("You read the " + this.getName() + ".  It reads: ");
+		this.getWorld().println(" \"" + booktext + "\"");
+		return false;
 	}
 
 	@Override
@@ -71,5 +72,10 @@ public class ItemBook extends Item
 	public String[] getVerbSynonyms() 	
 	{
 		return new String[]{"read"};
+	}
+	@Override
+	public boolean canInventory() 
+	{
+		return true;
 	}
 }

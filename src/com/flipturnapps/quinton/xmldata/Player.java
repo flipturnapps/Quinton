@@ -11,11 +11,13 @@ public class Player
 	private Location location;
 	private String name;
 	private ItemContainer inventory;
+	private int id;
 	public Player()
 	{
 		location = new Location();
 		name = "Quinton";
 		healthPercentage = 1;
+		id = 1;
 		this.setInventory(new ItemContainer());
 	}
 	public double getHealthPercentage() {
@@ -50,6 +52,23 @@ public class Player
 	@XmlElement
 	public void setInventory(ItemContainer inventory) {
 		this.inventory = inventory;
+	}
+	public int getId() {
+		return id;
+	}
+	@XmlAttribute
+	public void setId(int id) {
+		this.id = id;
+	}
+	public void inflate(World world)
+	{
+		this.getInventory().inflate(world);
+		
+	}
+	public void deflate()
+	{
+		this.getInventory().deflate();
+		
 	}
 
 }

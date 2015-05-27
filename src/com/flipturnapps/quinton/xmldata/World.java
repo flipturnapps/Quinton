@@ -3,8 +3,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.flipturnapps.kevinLibrary.command.CommandOutput;
+
 @XmlRootElement
-public class World 
+public class World implements CommandOutput
 {
 	private Room[] rooms;
 	private String name;
@@ -28,16 +30,14 @@ public class World
 	public void setRoom(Room[] rooms) {
 		this.rooms = rooms;
 	}
-	public void outputLine(String string) 
-	{
-		System.out.println(string);
-	}
+	
 	public void inflate()
 	{
 		for(int i = 0; i < rooms.length; i++)
 		{
 			rooms[i].inflate(this);
 		}
+		player.inflate(this);
 	}
 	public void deflate()
 	{
@@ -45,6 +45,7 @@ public class World
 		{
 			rooms[i].deflate(this);
 		}
+		player.deflate();
 	}
 	public Room getPlayersRoom() 
 	{
@@ -63,6 +64,21 @@ public class World
 	public Player getPlayer()
 	{
 		return this.player;
+	}
+	@Override
+	public void println(String s) 
+	{
+		System.out.println(s);		
+	}
+	@Override
+	public void print(String s) 
+	{
+		System.out.print(s);
+	}
+	@Override
+	public void println()
+	{
+		System.out.println();		
 	}
 	
 	
