@@ -12,7 +12,7 @@ public class Player
 	private String name;
 	private ItemContainer inventory;
 	private int id;
-	private boolean alive;
+	private boolean bleeding;
 	public Player()
 	{
 		location = new Location();
@@ -20,7 +20,6 @@ public class Player
 		healthPercentage = 1;
 		id = 1;
 		this.setInventory(new ItemContainer());
-		alive = true;
 	}
 	public double getHealthPercentage() {
 		return healthPercentage;
@@ -29,7 +28,7 @@ public class Player
 	public void setHealthPercentage(double healthPercentage) {
 		this.healthPercentage = healthPercentage;
 	}
-	
+
 	public void changeHealth(double changeAmount){
 		this.healthPercentage += changeAmount;
 	}
@@ -65,19 +64,22 @@ public class Player
 	public void inflate(World world)
 	{
 		this.getInventory().inflate(world);
-		
+
 	}
 	public void deflate()
 	{
 		this.getInventory().deflate();
+
+	}
+	public boolean isAlive() 
+	{
+		return this.getHealthPercentage() > 0;
+	}
+	public void tick() 
+	{
+		// TODO Auto-generated method stub
 		
 	}
-	public boolean getAlive() {
-		return alive;
-	}
-	@XmlElement
-	public void setAlive(boolean alive) {
-		this.alive = alive;
-	}
+
 
 }

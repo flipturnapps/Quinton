@@ -70,7 +70,7 @@ public class QuintonMain
 		Scanner scanner = new Scanner(System.in);
 		Room lastRoom = null;
 		Room room = null;			
-		while(world.getPlayer().getAlive())
+		while(world.getPlayer().isAlive())
 		{
 			room = world.getPlayersRoom();
 			if(room == null)

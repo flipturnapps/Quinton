@@ -84,6 +84,10 @@ public class World implements CommandOutput
 	{
 		System.out.println();		
 	}
+	public void tick()
+	{
+		this.getPlayer().tick();
+	}
 	
 	
 	
