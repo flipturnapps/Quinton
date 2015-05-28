@@ -43,26 +43,28 @@ public class DropCommand extends UserCommand
 	protected void userCommandExecute(String[] params, World world) 
 	{
 		Room room = world.getPlayersRoom();
-		
 		boolean hasDropped = false;
-		for(int i = 0; i < world.getPlayer().getInventory().getInflatedItems().size();i++)
+		if(world.getPlayer().getInventory().getInflatedItems() != null && world.getPlayer().getInventory().getInflatedItems().size() > 0)
 		{
-			if(world.getPlayer().getInventory().getInflatedItems().get(i).getName().equalsIgnoreCase(params[0]))
+			for(int i = 0; i < world.getPlayer().getInventory().getInflatedItems().size();i++)
 			{
-				dropItemInRoom(world.getPlayer().getInventory().getInflatedItems().get(i),room,world.getPlayer(),world);
+				if(world.getPlayer().getInventory().getInflatedItems().get(i).getName().equalsIgnoreCase(params[0]))
+				{
+					dropItemInRoom(world.getPlayer().getInventory().getInflatedItems().get(i),room,world.getPlayer(),world);
+					hasDropped = true;
+				}
+
+			}
+			if(params[0].equalsIgnoreCase("all"))
+			{
+				int iterations =world.getPlayer().getInventory().getInflatedItems().size();
+				for(int i = 0; i < iterations;i++)
+				{
+					dropItemInRoom(world.getPlayer().getInventory().getInflatedItems().get(0),room,world.getPlayer(),world);
+
+				}
 				hasDropped = true;
 			}
-			
-		}
-		if(params[0].equalsIgnoreCase("all"))
-		{
-			int iterations =world.getPlayer().getInventory().getInflatedItems().size();
-			for(int i = 0; i < iterations;i++)
-			{
-				dropItemInRoom(world.getPlayer().getInventory().getInflatedItems().get(0),room,world.getPlayer(),world);
-				
-			}
-			hasDropped = true;
 		}
 		if(!hasDropped)
 			world.println("You don't have that item on you...");
@@ -73,7 +75,7 @@ public class DropCommand extends UserCommand
 		player.getInventory().getInflatedItems().remove(item);
 		room.getItemContainer().addInflatedItem(item);	
 		world.println("You dropped the " + item.getName() + ".");
-		
+
 	}
 
 }

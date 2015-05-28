@@ -34,6 +34,7 @@ public class Room
 		startNarration = "startNarration";
 		this.setItemContainer(new ItemContainer());
 		this.setRoomCommandIds(null);
+		this.setDirConstraints(new DirectionConstraints(true,true,true,true,true,true));
 
 	}
 	public int getId() {

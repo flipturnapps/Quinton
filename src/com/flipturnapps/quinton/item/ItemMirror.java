@@ -57,12 +57,23 @@ public class ItemMirror extends EnvironmentItem
 		}
 		if(verb.equalsIgnoreCase("examine")||verb.equalsIgnoreCase("use"))
 		{
-			this.getWorld().println("Its a bit dirty.  Or is that your face?");
+			if(this.isBroken())
+				this.getWorld().println("Its broken.");
+			else
+			this.getWorld().println("More like examine yourself, amirite?");
 		}
 		if(verb.equalsIgnoreCase("touch"))
 		{
+			if(!this.isBroken())
+			{
 			this.getWorld().println("You feel yourself being teleported.");
 			this.getWorld().getPlayer().getLocation().changeZ(1);
+			}
+			else
+			{
+				this.getWorld().println("Ouch! You cut yourself. You now are bleeding out.");
+				//add bleeding
+			}
 			
 		}
 	}
