@@ -42,29 +42,29 @@ public class TakeCommand extends UserCommand
 	{
 		if(params.length > 0)
 		{
-		Room room = world.getPlayersRoom();
-		boolean hasTaken = false;
-		for(int i = 0; i < room.getItemContainer().getInflatedItems().size();i++)
-		{
-			if(room.getItemContainer().getInflatedItems().get(i).getName().equalsIgnoreCase(params[0]))
+			Room room = world.getPlayersRoom();
+			boolean hasTaken = false;
+			for(int i = 0; i < room.getItemContainer().getInflatedItems().size();i++)
 			{
-				takeItemFromRoom(room.getItemContainer().getInflatedItems().get(i),room,world.getPlayer(),world);
-				hasTaken=true;
-			}			
-		}
-		if(params[0].equalsIgnoreCase("all"))
-		{
-			Object[] items =room.getItemContainer().getInflatedItems().toArray();
-			for(int i = 0; i < items.length;i++)
-			{
-				takeItemFromRoom((Item) items[i],room,world.getPlayer(),world);	
+				if(room.getItemContainer().getInflatedItems().get(i).getName().equalsIgnoreCase(params[0]))
+				{
+					takeItemFromRoom(room.getItemContainer().getInflatedItems().get(i),room,world.getPlayer(),world);
+					hasTaken=true;
+				}			
 			}
-			hasTaken = true;
+			if(params[0].equalsIgnoreCase("all"))
+			{
+				Object[] items =room.getItemContainer().getInflatedItems().toArray();
+				for(int i = 0; i < items.length;i++)
+				{
+					takeItemFromRoom((Item) items[i],room,world.getPlayer(),world);	
+				}
+				hasTaken = true;
+			}
+			if(!hasTaken)
+				world.println("You couldn't find that item...");
 		}
-		if(!hasTaken)
-			world.println("You couldn't find that item...");
-		}
-		if(world.getPlayersRoom().getItemContainer().getInflatedItems().size() == 1)
+		else if(world.getPlayersRoom().getItemContainer().getInflatedItems().size() == 1)
 		{
 			Item item = world.getPlayersRoom().getItemContainer().getInflatedItems().get(0);
 			this.takeItemFromRoom(item, world.getPlayersRoom(), world.getPlayer(), world);
