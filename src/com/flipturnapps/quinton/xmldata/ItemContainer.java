@@ -11,7 +11,7 @@ public class ItemContainer
 {
 	private ArrayList<ItemGen> deflatedItems;
 	private ArrayList<Item> inflatedItems;
-	
+
 	public ItemContainer()
 	{
 		this.setDeflatedItems(new ArrayList<ItemGen>());
@@ -27,30 +27,38 @@ public class ItemContainer
 	public ArrayList<Item> getInflatedItems() {
 		return inflatedItems;
 	}
-	@XmlElement
+	
+	
 	public void setInflatedItems(ArrayList<Item> inflatedItems) {
 		this.inflatedItems = inflatedItems;
 	}
-	
+
 	public void deflate() 
 	{
-		this.getDeflatedItems().clear();
-		for(int i = 0; i < this.getInflatedItems().size(); i++)
+		if((this.getInflatedItems() != null) && (this.getInflatedItems().size() > 0))
 		{
-			Item item = this.getInflatedItems().get(i);
-			this.getDeflatedItems().add(item.deflate());
+			this.getDeflatedItems().clear();
+			for(int i = 0; i < this.getInflatedItems().size(); i++)
+			{
+				Item item = this.getInflatedItems().get(i);
+				this.getDeflatedItems().add(item.deflate());
+			}
 		}
-		this.getInflatedItems().clear();
+		this.setInflatedItems(null);
 	}
 	public void inflate(World world)
 	{
-		this.getInflatedItems().clear();
-		for(int i = 0; i < this.getDeflatedItems().size(); i++)
+		if(this.getDeflatedItems() != null && this.getDeflatedItems().size() != 0)
 		{
-			ItemGen itemgen = this.getDeflatedItems().get(i);
-			Item.inflateAndAddItem(world,itemgen,this.getInflatedItems());			
+			for(int i = 0; i < this.getDeflatedItems().size(); i++)
+			{
+				ItemGen itemgen = this.getDeflatedItems().get(i);
+				if(this.getInflatedItems() == null)
+					this.setInflatedItems(new ArrayList<Item>());
+				Item.inflateAndAddItem(world,itemgen,this.getInflatedItems());			
+			}
+			this.getDeflatedItems().clear();
 		}
-		this.getDeflatedItems().clear();
 	}
 	public void addInflatedItem(Item i)
 	{

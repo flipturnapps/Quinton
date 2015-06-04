@@ -11,11 +11,14 @@ public class Player
 	private Location location;
 	private String name;
 	private ItemContainer inventory;
+	private int id;
+	private boolean bleeding;
 	public Player()
 	{
 		location = new Location();
 		name = "Quinton";
 		healthPercentage = 1;
+		id = 1;
 		this.setInventory(new ItemContainer());
 	}
 	public double getHealthPercentage() {
@@ -25,7 +28,7 @@ public class Player
 	public void setHealthPercentage(double healthPercentage) {
 		this.healthPercentage = healthPercentage;
 	}
-	
+
 	public void changeHealth(double changeAmount){
 		this.healthPercentage += changeAmount;
 	}
@@ -51,5 +54,32 @@ public class Player
 	public void setInventory(ItemContainer inventory) {
 		this.inventory = inventory;
 	}
+	public int getId() {
+		return id;
+	}
+	@XmlAttribute
+	public void setId(int id) {
+		this.id = id;
+	}
+	public void inflate(World world)
+	{
+		this.getInventory().inflate(world);
+
+	}
+	public void deflate()
+	{
+		this.getInventory().deflate();
+
+	}
+	public boolean isAlive() 
+	{
+		return this.getHealthPercentage() > 0;
+	}
+	public void tick() 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

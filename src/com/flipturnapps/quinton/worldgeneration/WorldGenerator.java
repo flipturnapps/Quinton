@@ -5,20 +5,21 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import com.flipturnapps.quinton.xmldata.Location;
 import com.flipturnapps.quinton.xmldata.Room;
 import com.flipturnapps.quinton.xmldata.World;
 
 
 public class WorldGenerator 
 {
-	public World generateAndSaveQWorld(File f) 
+	public World generateAndSaveTestWorld(File f) 
 	{
-		World world = this.generateQWorld();
+		World world = this.generateTestWorld();
 		world.deflate();
-		this.saveQWorld(world, f);
+		this.saveWorld(world, f);
 		return world;
 	}
-	public World readQWorld(File f)
+	public World readWorld(File f)
 	{
 		try
 		{
@@ -36,7 +37,7 @@ public class WorldGenerator
 		}
 		return null;
 	}
-	public void saveQWorld(World w, File f)
+	public void saveWorld(World w, File f)
 	{
 		w.deflate();
 		try
@@ -47,7 +48,6 @@ public class WorldGenerator
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(w, f);
-			jaxbMarshaller.marshal(w, System.out);
 		}
 		catch(Exception ex)
 		{
@@ -55,17 +55,21 @@ public class WorldGenerator
 		}
 		w.inflate();
 	}
-	private World generateQWorld()
+	public World generateTestWorld()
 	{
-		RoomGenerator gen = new RoomGenerator();
+		TestRoomGenerator gen = new TestRoomGenerator();
 		World world = new World();
 		Room startRoom = gen.generateStartRoom(world);
-		Room[] rooms = new Room[1];
+		Room[] rooms = new Room[4];
 		rooms[0] = startRoom;
+		rooms[1] = gen.generateForestRoom(world, new Location(1,0,0));
+		rooms[2] = gen.generateMirrorRoom(world);
+		rooms[3] = gen.generateForestRoom(world, new Location(0,0,1));
 		world.setRoom(rooms);
-		System.out.println("kek");
+		world.inflate();
 		return world;
 	}
+	
 
 }
 

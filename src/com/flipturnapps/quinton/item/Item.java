@@ -12,14 +12,20 @@ public abstract class Item
 {
 	private static final String ATTRIBUTE_SEPARATOR_CHARACTER = ",";
 	private static final String KEYVAL_SEPARATOR_CHARACTER = ":";
-	
+
 	private String name;
 	private int id;
 	private World world;
 	public abstract int getSubtypeId();
-	public abstract void useAsSubtype();
+	public abstract void interactWith(String verb);
 	public abstract HashMap<String,String> getSubtypeAttributes();
 	protected abstract void processSubtypeAttribute(String name, String value);
+	public abstract boolean canInventory();
+	public abstract boolean isVerbAllowed(String verb);
+	public String getItemDisplayText()
+	{
+		return this.getName();
+	}
 	public Item(World world, ItemGen item)
 	{
 		this.setWorld(world);
@@ -71,32 +77,39 @@ public abstract class Item
 	private void addSubtypeAttributes(String attributeList)
 	{
 		String[] attributes = attributeList.split(ATTRIBUTE_SEPARATOR_CHARACTER);
-		for (int i = 0; i < attributes.length; i++) 
+		if(attributeList != null && attributeList.length() > 0)
 		{
-			String attribute = attributes[i];
-			String[] attributeParts = attribute.split(KEYVAL_SEPARATOR_CHARACTER);
-			this.processSubtypeAttribute(attributeParts[0], attributeParts[1]);
+			for (int i = 0; i < attributes.length; i++) 
+			{
+				String attribute = attributes[i];
+				String[] attributeParts = attribute.split(KEYVAL_SEPARATOR_CHARACTER);
+				this.processSubtypeAttribute(attributeParts[0], attributeParts[1]);
+			}
 		}
 	}
 	public ItemGen deflate()
 	{
 		ItemGen item = new ItemGen();
+
 		item.setId(this.getId());
 		item.setName(this.getName());
 		item.setItemTypeId(this.getSubtypeId());
 		String attributeString = "";
 		HashMap<String,String> attributes = this.getSubtypeAttributes();
-		Set<String> keys = attributes.keySet();
-		Object[] keysArray = keys.toArray();
-		for (int i = 0; i < keysArray.length; i++) 
+		if(this.getSubtypeAttributes() != null)
 		{
-			attributeString += keysArray[i];
-			attributeString += KEYVAL_SEPARATOR_CHARACTER;
-			attributeString += attributes.get(keysArray[i]+"");
-			if(keysArray.length -1 != i)
-				attributeString += ATTRIBUTE_SEPARATOR_CHARACTER;			
+			Set<String> keys = attributes.keySet();
+			Object[] keysArray = keys.toArray();
+			for (int i = 0; i < keysArray.length; i++) 
+			{
+				attributeString += keysArray[i];
+				attributeString += KEYVAL_SEPARATOR_CHARACTER;
+				attributeString += attributes.get(keysArray[i]+"");
+				if(keysArray.length -1 != i)
+					attributeString += ATTRIBUTE_SEPARATOR_CHARACTER;			
+			}
+			item.setItemAttributes(attributeString);
 		}
-		item.setItemAttributes(attributeString);
 		return item;
 	}
 	public static void inflateAndAddItem(World world, ItemGen itemgen, ArrayList<Item> inflatedItems)
@@ -104,8 +117,12 @@ public abstract class Item
 		Item inflatedItem = null;
 		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_BOOK)
 			inflatedItem = new ItemBook(world,itemgen);
+		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_MIRROR)
+			inflatedItem = new ItemMirror(world,itemgen);
+		if(itemgen.getItemTypeId()==ItemId.ITEMTYPE_ENVIRONMENT)
+			inflatedItem = new EnvironmentItem(world,itemgen);
 		inflatedItems.add(inflatedItem);
-		
+
 	}
 
 }

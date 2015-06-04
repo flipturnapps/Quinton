@@ -16,6 +16,19 @@ public abstract class CommandMove extends UserCommand
 		return this.getDirectionName();
 	}
 
+
+	@Override
+	public int getMaximumParams() 
+	{
+		return 0;
+	}
+
+	@Override
+	public int getMinimumParams()
+	{
+		return 0;
+	}
+	
 	@Override
 	public String getHelpText()
 	{
@@ -34,7 +47,7 @@ public abstract class CommandMove extends UserCommand
 	protected void userCommandExecute(String[] params, World world) 
 	{
 		if(!(this.movementAllowed(world.getPlayersRoom().getDirConstraints())))
-			world.outputLine("You cant go " + this.getDirectionName() + " from here.");
+			world.println("You cant go " + this.getDirectionName() + " from here.");
 		else
 			this.modifiyPlayerLocation(world.getPlayer().getLocation());
 	}

@@ -5,20 +5,25 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.flipturnapps.quinton.item.Item;
+import com.flipturnapps.quinton.room.RoomCommand;
 
 @XmlRootElement
 public class Room 
 {
+	private static final String ROOM_COMMAND_ID_SEPARATOR = ",";
+	private static final String EXPLORED_BY_ID_SEPARATOR = ",";
 	private int id;
 	private String name ="room";
 	private String description = "description";
 	private String startNarration = "";
-	private ArrayList<EventGen> events;	
 	private DirectionConstraints dirConstraints;
 	private Region region;
 	private Location location;
 	private ItemContainer itemContainer;
+	private RoomCommand[] commands;
+	private String roomCommandIds;
+	private String exploredByIdsString;
+	private ArrayList<Integer> exploredByIdsList;
 	public Room()
 	{
 		region = new Region();
@@ -27,9 +32,10 @@ public class Room
 		name = "RoomName";
 		description = "description";
 		startNarration = "startNarration";
-		events = new ArrayList<EventGen>();
 		this.setItemContainer(new ItemContainer());
-		
+		this.setRoomCommandIds(null);
+		this.setDirConstraints(new DirectionConstraints(true,true,true,true,true,true));
+
 	}
 	public int getId() {
 		return id;
@@ -38,11 +44,12 @@ public class Room
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	@XmlElement
+	
+	@XmlAttribute
 	public void setName(String name) {
 		this.name = name;
 	}	
@@ -60,19 +67,7 @@ public class Room
 	public void setStartNarration(String startNarration) {
 		this.startNarration = startNarration;
 	}
-	public ArrayList<EventGen> getEvent() {
-		return events;
-	}
-	@XmlElement
-	public void setEvent(ArrayList<EventGen> events) {
-		this.events = events;
-	}
-	public void addEvent(EventGen event)
-	{
-		this.events.add(event);
-	}
-	
-	
+
 	public DirectionConstraints getDirConstraints() {
 		return dirConstraints;
 	}
@@ -80,8 +75,8 @@ public class Room
 	public void setDirConstraints(DirectionConstraints dirConstraints) {
 		this.dirConstraints = dirConstraints;
 	}
-	
-	
+
+
 	public Location getLocation() {
 		return location;
 	}
@@ -105,15 +100,109 @@ public class Room
 	public void inflate(World world)
 	{
 		this.getItemContainer().inflate(world);
-		//more to inflate
+		this.inflateCommands();
+		this.inflateExploredByIds();
 	}
 	public void deflate(World world)
 	{
 		this.getItemContainer().deflate();
-		//more to deflate
+		this.deflateCommands();
+		this.deflateExploredByIds();
 	}
-	
-	
-	
-	
+	private void deflateCommands()
+	{
+		String idString = "";
+		RoomCommand[] commands = this.getRoomCommands();
+		if(commands != null)
+		{
+			for (int i = 0; i < commands.length; i++)
+			{				
+				idString += (commands[i].getRoomCommandId() + "");
+				if(i!=(commands.length-1))
+				{
+					idString += Room.ROOM_COMMAND_ID_SEPARATOR;
+				}
+			}
+			this.setRoomCommandIds(idString);
+		}
+		this.setRoomCommands(null);
+	}
+	private void inflateCommands()
+	{	
+		if(this.getRoomCommandIds() != null && !(this.getRoomCommandIds().equals("")))
+		{
+			String idStringList = this.getRoomCommandIds();
+			String[] idStrings = idStringList.split(ROOM_COMMAND_ID_SEPARATOR);
+			RoomCommand[] commands = new RoomCommand[idStrings.length];
+			for (int i = 0; i < idStrings.length; i++)
+			{
+				commands[i] = RoomCommand.createRoomCommand(Integer.parseInt(idStrings[i]));
+			}
+			this.setRoomCommands(commands);	
+		}
+	}
+	private void deflateExploredByIds()
+	{
+		String idString = "";
+		ArrayList<Integer> ids = this.getExploredByIdsList();
+		if(ids != null)
+		{
+			for (int i = 0; i < ids.size(); i++)
+			{				
+				idString += (ids.get(i) + "");
+				if(i!=(ids.size()-1))
+				{
+					idString += Room.EXPLORED_BY_ID_SEPARATOR;
+				}
+			}
+			this.setExploredByIdsString(idString);
+		}
+		this.setExploredByIdsList(null);
+	}
+	private void inflateExploredByIds()
+	{	
+		if(this.getExploredByIdsString() != null && !(this.getExploredByIdsString()).equals(""))
+		{
+			String idStringList = this.getExploredByIdsString();
+			String[] idStrings = idStringList.split(Room.EXPLORED_BY_ID_SEPARATOR);
+			ArrayList<Integer> ids = new ArrayList<Integer>();
+			for (int i = 0; i < idStrings.length; i++)
+			{
+				ids.add(Integer.parseInt(idStrings[i]));
+			}
+			this.setExploredByIdsList(ids);	
+		}
+	}
+
+	public RoomCommand[] getRoomCommands() {
+		return commands;
+	}
+	public void setRoomCommands(RoomCommand[] command)
+	{
+		this.commands = command;
+	}
+	public String getRoomCommandIds() {
+		return roomCommandIds;
+	}
+	@XmlElement
+	public void setRoomCommandIds(String roomCommandIds) {
+		this.roomCommandIds = roomCommandIds;
+	}
+	public String getExploredByIdsString() {
+		return exploredByIdsString;
+	}
+	@XmlElement
+	public void setExploredByIdsString(String exploredByIdsString) {
+		this.exploredByIdsString = exploredByIdsString;
+	}
+	public ArrayList<Integer> getExploredByIdsList() {
+		return exploredByIdsList;
+	}
+	public void setExploredByIdsList(ArrayList<Integer> exploredByIdsList) {
+		this.exploredByIdsList = exploredByIdsList;
+	}
+	public void inferDirectionConstraints(boolean forceOverNonNull)
+	{
+		//code to write here.
+	}
 }
